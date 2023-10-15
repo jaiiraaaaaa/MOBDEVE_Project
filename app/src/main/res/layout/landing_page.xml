@@ -46,7 +46,7 @@
         app:layout_constraintTop_toBottomOf="@+id/password_login" />
 
     <Button
-        android:id="@+id/login_register"
+        android:id="@+id/login_landing"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="92dp"
@@ -55,4 +55,23 @@
         app:layout_constraintHorizontal_bias="0.184"
         app:layout_constraintStart_toEndOf="@+id/register_landing"
         app:layout_constraintTop_toBottomOf="@+id/password_login" />
+
+    <EditText
+        android:id="@+id/inputPassword_landing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="169dp"
+        tools:layout_editor_absoluteY="240dp" />
+
+    <EditText
+        android:id="@+id/inputEmail_landing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:text=""
+        tools:layout_editor_absoluteX="168dp"
+        tools:layout_editor_absoluteY="198dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

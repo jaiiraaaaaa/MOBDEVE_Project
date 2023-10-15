@@ -5,6 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <EditText
+        android:id="@+id/inputAddress"
+        android:layout_width="179dp"
+        android:layout_height="46dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text=""
+        tools:layout_editor_absoluteX="165dp"
+        tools:layout_editor_absoluteY="389dp" />
+
     <TextView
         android:id="@+id/registerTV"
         android:layout_width="wrap_content"
@@ -21,71 +31,107 @@
         android:id="@+id/firstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginBottom="20dp"
         android:text="First Name"
-        app:layout_constraintBottom_toTopOf="@+id/lastName"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="221dp" />
 
     <TextView
         android:id="@+id/lastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginBottom="20dp"
         android:text="Last Name"
-        app:layout_constraintBottom_toTopOf="@+id/birthday"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="266dp" />
 
     <TextView
         android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginBottom="20dp"
         android:text="Email"
-        app:layout_constraintBottom_toTopOf="@+id/address"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="349dp" />
 
     <TextView
         android:id="@+id/birthday"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginBottom="20dp"
         android:text="Birthday"
-        app:layout_constraintBottom_toTopOf="@+id/email"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="309dp" />
 
     <TextView
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginBottom="284dp"
         android:text="password"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="470dp" />
 
     <TextView
         android:id="@+id/address"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginBottom="20dp"
         android:text="Address"
-        app:layout_constraintBottom_toTopOf="@+id/password"
-        app:layout_constraintStart_toStartOf="parent" />
+        tools:layout_editor_absoluteX="56dp"
+        tools:layout_editor_absoluteY="416dp" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="192dp"
+        android:layout_marginBottom="136dp"
         android:text="Register"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/inputFirstName"
+        android:layout_width="179dp"
+        android:layout_height="46dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text=""
+        tools:layout_editor_absoluteX="165dp"
+        tools:layout_editor_absoluteY="201dp" />
+
+    <EditText
+        android:id="@+id/inputLastName"
+        android:layout_width="179dp"
+        android:layout_height="46dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text=""
+        tools:layout_editor_absoluteX="165dp"
+        tools:layout_editor_absoluteY="247dp" />
+
+    <EditText
+        android:id="@+id/inputBirthday"
+        android:layout_width="179dp"
+        android:layout_height="46dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text=""
+        tools:layout_editor_absoluteX="165dp"
+        tools:layout_editor_absoluteY="293dp" />
+
+    <EditText
+        android:id="@+id/inputEmail"
+        android:layout_width="179dp"
+        android:layout_height="46dp"
+        android:ems="10"
+        android:inputType="text"
+        android:text=""
+        tools:layout_editor_absoluteX="165dp"
+        tools:layout_editor_absoluteY="339dp" />
+
+    <EditText
+        android:id="@+id/inputPassword"
+        android:layout_width="179dp"
+        android:layout_height="46dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="165dp"
+        tools:layout_editor_absoluteY="454dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
