@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">planify</string>
+    <string name="terms_and_service">By signing up, you agree to the <u>Terms of Service</u> and <u>Privacy Policy</u>.</string>
+    <string name="forgot_password">Forgot Password? <u>Click here</u>.</string>
 </resources>
