@@ -19,7 +19,7 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".NoteActivity"
+            android:name=".OverviewActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

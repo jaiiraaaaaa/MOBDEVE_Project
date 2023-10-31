@@ -12,7 +12,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(viewBinding.root)
 
         viewBinding.loginBtnLogin.setOnClickListener {
-            val intent = Intent(this, NoteActivity::class.java)
+            val intent = Intent(this, OverviewActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             this.startActivity(intent)
             finish()
