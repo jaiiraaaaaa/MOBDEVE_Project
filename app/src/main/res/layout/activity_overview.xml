@@ -20,7 +20,7 @@
         app:srcCompat="@drawable/mobdeve___high_fidel_prototype" />
 
     <TextView
-        android:id="@+id/overview_tv_planify"
+        android:id="@+id/overview_planify_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
@@ -52,11 +52,11 @@
 
     <ImageView
         android:id="@+id/task_overview_iv"
-        android:layout_width="372dp"
-        android:layout_height="30dp"
+        android:layout_width="281dp"
+        android:layout_height="29dp"
         android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.487"
+        app:layout_constraintHorizontal_bias="0.83"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/task_overview_bg" />
@@ -74,76 +74,28 @@
         app:layout_constraintStart_toStartOf="@+id/task_overview_iv"
         app:layout_constraintTop_toTopOf="@+id/task_overview_iv" />
 
+    <include
+        android:id="@+id/tasks_header_tr"
+        layout="@layout/tasks_overview_header"
+        android:layout_width="367dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="7dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_overview_iv" />
+
     <ScrollView
         android:id="@+id/tasks_sv"
         android:layout_width="367dp"
         android:layout_height="124dp"
-        android:layout_marginTop="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_overview_iv">
+        app:layout_constraintTop_toBottomOf="@+id/tasks_header_tr">
 
-        <TableLayout
-            android:id="@+id/tasks_table"
+        <include
+            layout="@layout/task_overview_table"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif-black"
-                    android:text="Title"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:background="@drawable/tasks_header_cell_bg"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif-black"
-                    android:text="Category"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:background="@drawable/tasks_header_cell_bg"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif-black"
-                    android:text="Progress"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:background="@drawable/tasks_header_cell_bg"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:fontFamily="sans-serif-black"
-                    android:text="Deadline"
-                    android:gravity="center"
-                    android:padding="3dp"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/white"
-                    android:background="@drawable/tasks_header_cell_bg"/>
-            </TableRow>
-
-
-
-        </TableLayout>
+            android:layout_height="wrap_content" />
     </ScrollView>
 
 

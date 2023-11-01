@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableLayout
+        android:id="@+id/tasks_table"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="MCO2"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="MOBDEVE"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="In Progress"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="11/04/23"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="MCO1"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="CSOPESY"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="Revisions"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="11/06/23"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="Chapter 1-3"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="THESIS"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="In Progress"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="11/06/23"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="MCO2"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="MOBDEVE"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="In Progress"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="11/03/23"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="Notes"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="STINTSY"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="Not Started"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="11/05/23"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="Watch Lectures"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="CSOPESY"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="Not Started"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/tasks_body_cell_bg"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="11/05/23"
+                android:textSize="12sp"
+                android:maxLength="14"/>
+
+        </TableRow>
+
+    </TableLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

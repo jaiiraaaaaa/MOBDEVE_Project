@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/tasks_header_cell_bg"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="Title"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:maxLength="14"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/tasks_header_cell_bg"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="Category"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:maxLength="14"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/tasks_header_cell_bg"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="Progress"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:maxLength="14"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:background="@drawable/tasks_header_cell_bg"
+            android:fontFamily="sans-serif-black"
+            android:gravity="center"
+            android:padding="3dp"
+            android:text="Deadline"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:maxLength="14"/>
+    </TableRow>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
