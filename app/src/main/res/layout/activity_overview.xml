@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+<androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/gray">
@@ -80,7 +86,7 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-black"
         android:text="Task Overview"
-        android:textColor="@color/yellow_logo"
+        android:textColor="@color/pale_yellow"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="@+id/task_overview_iv"
         app:layout_constraintEnd_toEndOf="@+id/task_overview_iv"
@@ -185,5 +191,44 @@
         app:layout_constraintTop_toBottomOf="@+id/notes_sv"
         app:srcCompat="@drawable/add_note_btn" />
 
+    <ImageView
+        android:id="@+id/calendar_iv"
+        android:layout_width="281dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.791"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_note_btn"
+        app:srcCompat="@drawable/calendar_bg" />
+
+    <ImageButton
+        android:id="@+id/calendar_view_btn"
+        android:layout_width="78dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="10dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/calendar_iv"
+        app:layout_constraintEnd_toStartOf="@+id/calendar_iv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/calendar_iv"
+        app:srcCompat="@drawable/calendar_view_by" />
+
+    <TextView
+        android:id="@+id/calendar_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Calendar"
+        android:textColor="@color/brown"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/calendar_iv"
+        app:layout_constraintEnd_toEndOf="@+id/calendar_iv"
+        app:layout_constraintStart_toStartOf="@+id/calendar_iv"
+        app:layout_constraintTop_toTopOf="@+id/calendar_iv" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

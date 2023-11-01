@@ -2,8 +2,8 @@
     <item>
         <shape android:shape="rectangle">
             <corners android:radius="7dp" /> <!-- Adjust the radius for rounding -->
-            <solid android:color="#DD8E19" />
-            <stroke android:width="2dp" android:color="#F1BF74" />
+            <solid android:color="#FFEFD8" />
+            <stroke android:width="2dp" android:color="#DD8E19" />
         </shape>
     </item>
 </layer-list>

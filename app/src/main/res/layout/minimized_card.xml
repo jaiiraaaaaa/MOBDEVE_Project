@@ -12,7 +12,7 @@
         android:layout_height="140dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
-        app:cardBackgroundColor="@color/light_blue"
+        app:cardBackgroundColor="@color/gray"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp">
 
@@ -152,7 +152,7 @@
         android:layout_height="140dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp"
-        app:cardBackgroundColor="@color/light_yellow"
+        app:cardBackgroundColor="@color/gray"
         android:layout_marginStart="4dp"
         android:layout_marginEnd="4dp">
 
