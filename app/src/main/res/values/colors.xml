@@ -7,5 +7,7 @@
     <color name="dark_gray">#7B7B7B</color>
     <color name="yellow">#F4A633</color>
     <color name="yellow_logo">#F1BF74</color>
+    <color name="light_yellow">#F1D6AD</color>
     <color name="brown">#AD6E11</color>
+    <color name="light_blue">#B0CEDB</color>
 </resources>

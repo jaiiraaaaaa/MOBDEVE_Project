@@ -50,6 +50,19 @@
         app:srcCompat="@drawable/menu_bar"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageButton
+        android:id="@+id/tasks_sort_btn"
+        android:layout_width="77dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="10dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/task_overview_iv"
+        app:layout_constraintEnd_toStartOf="@+id/task_overview_iv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/task_overview_iv"
+        app:srcCompat="@drawable/tasks_sort_by" />
+
     <ImageView
         android:id="@+id/task_overview_iv"
         android:layout_width="281dp"
@@ -97,6 +110,80 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </ScrollView>
+
+    <ImageButton
+        android:id="@+id/add_task_btn"
+        android:layout_width="74dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="4dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="@+id/tasks_sv"
+        app:layout_constraintTop_toBottomOf="@+id/tasks_sv"
+        app:srcCompat="@drawable/add_task_btn" />
+
+    <ImageView
+        android:id="@+id/notes_attachments_iv"
+        android:layout_width="281dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_task_btn"
+        app:srcCompat="@drawable/notes_attachments_bg" />
+
+    <TextView
+        android:id="@+id/notes_attachments_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:text="Notes and Attachments"
+        android:textColor="@color/dark_gray"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/notes_attachments_iv"
+        app:layout_constraintEnd_toEndOf="@+id/notes_attachments_iv"
+        app:layout_constraintStart_toStartOf="@+id/notes_attachments_iv"
+        app:layout_constraintTop_toTopOf="@+id/notes_attachments_iv" />
+
+    <ImageButton
+        android:id="@+id/notes_sort_btn"
+        android:layout_width="78dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="5dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@+id/notes_attachments_iv"
+        app:layout_constraintStart_toEndOf="@+id/notes_attachments_iv"
+        app:layout_constraintTop_toTopOf="@+id/notes_attachments_iv"
+        app:srcCompat="@drawable/notes_sort_by" />
+
+    <HorizontalScrollView
+        android:id="@+id/notes_sv"
+        android:layout_width="363dp"
+        android:layout_height="149dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notes_attachments_iv">
+
+        <include
+            layout="@layout/minimized_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </HorizontalScrollView>
+
+    <ImageButton
+        android:id="@+id/add_note_btn"
+        android:layout_width="74dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="4dp"
+        android:background="@null"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="@+id/notes_sv"
+        app:layout_constraintTop_toBottomOf="@+id/notes_sv"
+        app:srcCompat="@drawable/add_note_btn" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
