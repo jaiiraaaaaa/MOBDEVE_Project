@@ -12,6 +12,16 @@
     android:layout_height="match_parent"
     android:background="@color/gray">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/notesRecyclerView"
+        android:layout_width="298dp"
+        android:layout_height="139dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="@+id/notes_sv"
+        app:layout_constraintEnd_toEndOf="@+id/notes_sv"
+        app:layout_constraintStart_toStartOf="@+id/notes_sv"
+        app:layout_constraintTop_toTopOf="@+id/notes_sv" />
+
     <ImageView
         android:id="@+id/overview_iv_logo"
         android:layout_width="71dp"
@@ -169,16 +179,11 @@
         android:id="@+id/notes_sv"
         android:layout_width="363dp"
         android:layout_height="149dp"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notes_attachments_iv">
-
-        <include
-            layout="@layout/minimized_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </HorizontalScrollView>
+        app:layout_constraintTop_toBottomOf="@+id/notes_attachments_iv" />
 
     <ImageButton
         android:id="@+id/add_note_btn"
