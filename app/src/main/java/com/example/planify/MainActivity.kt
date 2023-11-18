@@ -9,6 +9,10 @@ import com.example.planify.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var notesAdapter: NotesAdapter
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: HorizontalRecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val viewBinding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
@@ -23,11 +27,16 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, LoginActivity::class.java)
             this.startActivity(intent)
         }
-        val sampleNotes = generateSampleNotes()
-        notesAdapter = NotesAdapter(sampleNotes)
-        val recyclerView = findViewById<RecyclerView>(R.id.notesRecyclerView)
+//        val sampleNotes = generateSampleNotes()
+//        notesAdapter = NotesAdapter(sampleNotes)
+//        val recyclerView = findViewById<RecyclerView>(R.id.notesRecyclerView)
+//        recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+//        recyclerView.adapter = notesAdapter
+        recyclerView = findViewById(R.id.notesRecyclerView)
+        adapter = HorizontalRecyclerView()
+
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        recyclerView.adapter = notesAdapter
+        recyclerView.adapter = adapter
     }
     private fun generateSampleNotes(): List<Note> {
         return listOf(
