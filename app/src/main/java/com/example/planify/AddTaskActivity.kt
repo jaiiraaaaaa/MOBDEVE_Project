@@ -13,7 +13,6 @@ import com.example.planify.databinding.ActivityAddTaskBinding
 
 class AddTaskActivity : AppCompatActivity() {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityAddTaskBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
