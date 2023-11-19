@@ -7,7 +7,7 @@
     android:orientation="horizontal">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/note1CardView"
+        android:id="@+id/note_template"
         android:layout_width="140dp"
         android:layout_height="140dp"
         app:cardCornerRadius="8dp"
@@ -19,7 +19,7 @@
         <!-- Card content goes here -->
 
         <ImageButton
-            android:id="@+id/note1_expand_btn"
+            android:id="@+id/note_expand_btn"
             android:layout_width="15dp"
             android:layout_height="15dp"
             android:background="@null"
@@ -36,20 +36,20 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/note1_title_tv"
+                android:id="@+id/note_title_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-black"
-                android:text="MCO2 Deadline"
+                android:text="Note Title"
                 android:textColor="@color/dark_gray"
                 android:textSize="14sp"/>
 
             <TextView
-                android:id="@+id/note1_desc_tv"
+                android:id="@+id/note_desc_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
-                android:text="@string/note_1"
+                android:text="Note details"
                 android:textSize="7sp"
                 android:textStyle="italic"/>
 
@@ -64,7 +64,7 @@
             android:layout_margin="8dp"/>
 
         <TextView
-            android:id="@+id/note1_date_tv"
+            android:id="@+id/note_date_tv"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|center"
@@ -76,145 +76,7 @@
 
     </androidx.cardview.widget.CardView>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/note2CardView"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:cardBackgroundColor="@color/gray"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp">
 
-        <!-- Card content goes here -->
-
-        <ImageButton
-            android:id="@+id/note2_expand_btn"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:background="@null"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/expand_btn"
-            android:layout_margin="8dp"
-            android:layout_gravity="top|end"/>
-
-        <LinearLayout
-            android:layout_width="125dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="7dp"
-            android:layout_marginTop="50dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/note2_title_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-black"
-                android:text="STINTSY Notes"
-                android:textColor="@color/dark_gray"
-                android:textSize="14sp"/>
-
-            <TextView
-                android:id="@+id/note2_desc_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:text="@string/note_2"
-                android:textSize="7sp"
-                android:textStyle="italic"/>
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/date2_border_iv"
-            android:layout_width="125dp"
-            android:layout_height="15dp"
-            app:srcCompat="@drawable/rounded_date_border"
-            android:layout_gravity="bottom|center"
-            android:layout_margin="8dp"/>
-
-        <TextView
-            android:id="@+id/note2_date_tv"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:layout_margin="11dp"
-            android:fontFamily="sans-serif"
-            android:text="10/27/23"
-            android:textAlignment="center"
-            android:textSize="6sp" />
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/note3CardView"
-        android:layout_width="140dp"
-        android:layout_height="140dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:cardBackgroundColor="@color/gray"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp">
-
-        <!-- Card content goes here -->
-
-        <ImageButton
-            android:id="@+id/note3_expand_btn"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:background="@null"
-            android:scaleType="fitCenter"
-            app:srcCompat="@drawable/expand_btn"
-            android:layout_margin="8dp"
-            android:layout_gravity="top|end"/>
-
-        <LinearLayout
-            android:layout_width="125dp"
-            android:layout_height="70dp"
-            android:layout_marginLeft="7dp"
-            android:layout_marginTop="50dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/note3_title_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif-black"
-                android:text="Long Exam Scheds"
-                android:textColor="@color/dark_gray"
-                android:textSize="14sp"/>
-
-            <TextView
-                android:id="@+id/note3_desc_tv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
-                android:text="@string/note_3"
-                android:textSize="7sp"
-                android:textStyle="italic"/>
-
-        </LinearLayout>
-
-        <ImageView
-            android:id="@+id/date3_border_iv"
-            android:layout_width="125dp"
-            android:layout_height="15dp"
-            app:srcCompat="@drawable/rounded_date_border"
-            android:layout_gravity="bottom|center"
-            android:layout_margin="8dp"/>
-
-        <TextView
-            android:id="@+id/note3_date_tv"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center"
-            android:layout_margin="11dp"
-            android:fontFamily="sans-serif"
-            android:text="10/27/23"
-            android:textAlignment="center"
-            android:textSize="6sp" />
-
-    </androidx.cardview.widget.CardView>
 
 </LinearLayout>
 
