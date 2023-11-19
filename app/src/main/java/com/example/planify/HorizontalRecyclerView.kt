@@ -12,7 +12,7 @@ class HorizontalRecyclerView(private val notesList: List<Note>) : RecyclerView.A
         return ViewHolder(view)
     }
     override fun getItemCount(): Int {
-        return 20 // temp value
+        return notesList.size
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val note = notesList[position]
