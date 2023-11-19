@@ -27,7 +27,7 @@
             android:fontFamily="sans-serif-black"
             android:gravity="center"
             android:padding="3dp"
-            android:text="Category"
+            android:text="Subject"
             android:textColor="@color/white"
             android:textSize="12sp"
             android:textStyle="bold"

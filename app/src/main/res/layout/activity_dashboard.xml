@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFC">
+
+    <ImageView
+        android:id="@+id/dashboard_iv_header"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:adjustViewBounds="false"
+        android:cropToPadding="false"
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/dashboard_iv_header" />
+
+    <ImageView
+        android:id="@+id/dashboard_iv_logo"
+        android:layout_width="71dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="310dp"
+        android:src="@drawable/mobdeve___high_fidel_prototype"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/dashboard_planify_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:shadowColor="@color/black"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="10"
+        android:text="PLANIFY"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="@+id/dashboard_iv_logo"
+        app:layout_constraintStart_toStartOf="@+id/dashboard_iv_logo"
+        app:layout_constraintTop_toTopOf="@+id/dashboard_iv_logo" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="4dp"
+        android:orientation="vertical"
+        app:layout_constraintStart_toEndOf="@+id/dashboard_planify_tv"
+        app:layout_constraintTop_toTopOf="@+id/dashboard_iv_logo">
+
+        <TextView
+            android:id="@+id/dashboard_welcome_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="Welcome back,"
+            android:textColor="@color/brown"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/dashboard_username_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:text="Jane Doe"
+            android:textSize="13.5sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/dashboard_rounded_border"
+        android:layout_width="380dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_iv_header"
+        app:srcCompat="@drawable/rounded_border" />
+
+    <TextView
+        android:id="@+id/dashboard_tasks_status_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/brown"
+        android:textSize="15sp"
+        android:text="Tasks Status"
+        app:layout_constraintBottom_toBottomOf="@+id/dashboard_rounded_border"
+        app:layout_constraintEnd_toEndOf="@+id/dashboard_rounded_border"
+        app:layout_constraintStart_toStartOf="@+id/dashboard_rounded_border"
+        app:layout_constraintTop_toTopOf="@+id/dashboard_rounded_border" />
+
+    <ImageView
+        android:id="@+id/dashboard_iv_todo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_rounded_border"
+        app:srcCompat="@drawable/todo" />
+
+    <ImageView
+        android:id="@+id/dashboard_iv_in_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="5dp"
+        app:layout_constraintEnd_toStartOf="@+id/dashboard_iv_completed"
+        app:layout_constraintStart_toEndOf="@+id/dashboard_iv_todo"
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_rounded_border"
+        app:srcCompat="@drawable/in_progress" />
+
+    <ImageView
+        android:id="@+id/dashboard_iv_completed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_rounded_border"
+        app:srcCompat="@drawable/completed" />
+
+    <TextView
+        android:id="@+id/dashboard_todo_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="1 / N"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/dashboard_iv_todo"
+        app:layout_constraintStart_toStartOf="@+id/dashboard_iv_todo"
+        app:layout_constraintTop_toTopOf="@+id/dashboard_iv_todo" />
+
+    <TextView
+        android:id="@+id/dashboard_in_progress_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="1 / N"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/dashboard_iv_in_progress"
+        app:layout_constraintStart_toStartOf="@+id/dashboard_iv_in_progress"
+        app:layout_constraintTop_toTopOf="@+id/dashboard_iv_in_progress" />
+
+    <TextView
+        android:id="@+id/dashboard_completed_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:text="1 / N"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/dashboard_iv_completed"
+        app:layout_constraintStart_toStartOf="@+id/dashboard_iv_completed"
+        app:layout_constraintTop_toTopOf="@+id/dashboard_iv_completed" />
+
+    <ImageView
+        android:id="@+id/dashboard_rounded_border2"
+        android:layout_width="380dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_iv_in_progress"
+        app:srcCompat="@drawable/rounded_border"/>
+
+    <TextView
+        android:id="@+id/dashboard_tasks_due_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:textColor="@color/brown"
+        android:textSize="15sp"
+        android:text="Tasks Due Today"
+        app:layout_constraintBottom_toBottomOf="@+id/dashboard_rounded_border2"
+        app:layout_constraintEnd_toEndOf="@+id/dashboard_rounded_border2"
+        app:layout_constraintStart_toStartOf="@+id/dashboard_rounded_border2"
+        app:layout_constraintTop_toTopOf="@+id/dashboard_rounded_border2" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_rounded_border2">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleTasks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dashboard_rounded_border2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20px"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/dashboardNav"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-10px"
+                android:backgroundTint="@color/brown"
+                android:contentDescription="dashboard button"
+                android:minHeight="48dp"
+                app:srcCompat="@drawable/baseline_view_list_24_white" />
+
+            <TextView
+                android:id="@+id/dashboardText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Dashboard"
+                android:textAlignment="center"
+                android:textColor="@color/brown" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/taskNav"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-10px"
+                android:backgroundTint="#FFFFFF"
+                android:contentDescription="list button"
+                android:minHeight="48dp"
+                app:srcCompat="@drawable/baseline_notes_24" />
+
+            <TextView
+                android:id="@+id/listText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tasks/Notes"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/calendarNav"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-10px"
+                android:backgroundTint="#00FFFFFF"
+                android:contentDescription="calendar button"
+                android:minHeight="48dp"
+                app:srcCompat="@drawable/baseline_calendar_month_24" />
+
+            <TextView
+                android:id="@+id/calendarText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Calendar"
+                android:textAlignment="center" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <ImageButton
+                android:id="@+id/logoutBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-10px"
+                android:backgroundTint="#00FFFFFF"
+                android:contentDescription="log out button"
+                android:minHeight="48dp"
+                app:srcCompat="@drawable/baseline_logout_24" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Log Out"
+                android:textAlignment="center"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

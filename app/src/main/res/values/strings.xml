@@ -4,6 +4,6 @@
     <string name="forgot_password">Forgot Password? <u>Click here</u>.</string>
     <string name="note_1">Canvas deadline will not be changed; latest you can submit is on November 4</string>
     <string name="note_2">Neural network - They come in all shapes and sizes; Hidden layer - Gives room for the network to learn other “representations” of your data to lower loss</string>
-    <string name="note_3">CSOPESY - November;
-        STINTSY - November 10</string>
+    <string name="note_3">CSOPESY - November;STINTSY - November 10</string>
+    <string name="sort_by"> Sort by</string>
 </resources>
