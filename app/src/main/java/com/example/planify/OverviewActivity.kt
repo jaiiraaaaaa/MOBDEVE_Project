@@ -3,6 +3,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,16 +33,23 @@ class ItemAdapter(private val notes: List<Note>) : RecyclerView.Adapter<ItemView
 class OverviewActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: HorizontalRecyclerView
+    private var notes = mutableListOf<Note>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val viewBinding: ActivityOverviewBinding = ActivityOverviewBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
-        val notes = generateSampleNotes()
+        notes = generateSampleNotes().toMutableList()
         recyclerView = findViewById(R.id.notesRecyclerView)
         adapter = HorizontalRecyclerView(notes)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+        val addButton: ImageButton = findViewById(R.id.add_note_btn)
+        addButton.setOnClickListener {
+            notes.add(Note("New Note"))
+            adapter.notifyDataSetChanged()
+        }
     }
     private fun generateSampleNotes(): List<Note> {
         return listOf(
