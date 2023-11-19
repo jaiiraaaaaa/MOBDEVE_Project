@@ -6,4 +6,5 @@
     <string name="note_2">Neural network - They come in all shapes and sizes; Hidden layer - Gives room for the network to learn other “representations” of your data to lower loss</string>
     <string name="note_3">CSOPESY - November;STINTSY - November 10</string>
     <string name="sort_by"> Sort by</string>
+    <string name="view_by"> View by</string>
 </resources>

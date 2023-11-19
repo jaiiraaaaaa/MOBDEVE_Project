@@ -95,7 +95,7 @@
 
     <include
         android:id="@+id/tasks_header_tr"
-        layout="@layout/tasks_overview_header"
+        layout="@layout/layout_tasks_editable_header"
         android:layout_width="367dp"
         android:layout_height="22dp"
         android:layout_marginTop="7dp"
@@ -112,7 +112,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tasks_header_tr">
 
         <include
-            layout="@layout/task_overview_table"
+            layout="@layout/layout_task_editable_row"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </ScrollView>
@@ -175,7 +175,7 @@
         app:layout_constraintTop_toBottomOf="@+id/notes_attachments_iv">
 
         <include
-            layout="@layout/minimized_card"
+            layout="@layout/layout_notes_card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
     </HorizontalScrollView>

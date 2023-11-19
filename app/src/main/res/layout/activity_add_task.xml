@@ -27,150 +27,161 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="240dp"
         android:fontFamily="sans-serif-black"
-        android:text="Your Tasks:"
+        android:text="Add Task"
         android:textColor="@color/brown"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="130dp"
-        android:layout_height="25dp"
-        android:hint="@string/sort_by"
-        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
-        android:layout_marginLeft="10dp"
-        android:textColorHint="@color/brown"
-        app:boxBackgroundColor="@color/pale_yellow"
-        app:layout_constraintBottom_toBottomOf="@+id/tasks_task_overview_tv"
-        app:layout_constraintStart_toEndOf="@+id/tasks_task_overview_tv"
-        app:layout_constraintTop_toTopOf="@+id/tasks_task_overview_tv">
-
-        <AutoCompleteTextView
-            android:id="@+id/tasks_sort_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none">
-
-        </AutoCompleteTextView>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <include
-        android:id="@+id/tasks_header_tr"
-        layout="@layout/layout_tasks_editable_header"
-        android:layout_width="367dp"
-        android:layout_height="22dp"
-        android:layout_marginTop="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tasks_task_overview_tv" />
-
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="0dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tasks_header_tr">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleTasks"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-    </LinearLayout>
-
-    <ImageButton
-        android:id="@+id/add_task_btn"
-        android:layout_width="74dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="7dp"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout1"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
-        app:srcCompat="@drawable/add_task_btn" />
 
     <TextView
-        android:id="@+id/tasks_notes_tv"
+        android:id="@+id/title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Title"
+        android:textColor="@color/brown"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tasks_iv_header" />
+
+    <EditText
+        android:id="@+id/inputTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textbox"
+        android:ems="15"
+        android:inputType="text"
+        android:hint="Your task's title."
+        android:textStyle="italic"
+        android:paddingStart="30px"
+        app:layout_constraintEnd_toEndOf="@+id/title_tv"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/title_tv"
+        app:layout_constraintTop_toBottomOf="@+id/title_tv" />
+
+    <TextView
+        android:id="@+id/category_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginStart="240dp"
-        android:layout_marginEnd="20dp"
-        android:fontFamily="sans-serif-black"
-        android:text="Your Notes:"
+        android:text="Category"
         android:textColor="@color/brown"
-        android:textSize="30sp"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/add_task_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/inputTitle" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:layout_width="130dp"
-        android:layout_height="25dp"
-        android:hint="@string/sort_by"
-        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
-        android:layout_marginRight="10dp"
-        android:textColorHint="@color/brown"
-        app:boxBackgroundColor="@color/pale_yellow"
-        app:layout_constraintBottom_toBottomOf="@+id/tasks_notes_tv"
-        app:layout_constraintEnd_toStartOf="@+id/tasks_notes_tv"
-        app:layout_constraintTop_toTopOf="@+id/tasks_notes_tv">
+    <EditText
+        android:id="@+id/inputCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textbox"
+        android:ems="15"
+        android:inputType="text"
+        android:paddingStart="30px"
+        android:hint="The subject/category of your task."
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="@+id/category_tv"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/category_tv"
+        app:layout_constraintTop_toBottomOf="@+id/category_tv" />
 
-        <AutoCompleteTextView
-            android:id="@+id/notes_sort_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="none">
+    <TextView
+        android:id="@+id/status_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Status"
+        android:textColor="@color/brown"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputCategory" />
 
-        </AutoCompleteTextView>
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <LinearLayout
-        android:id="@+id/linearLayout3"
+    <RadioGroup
+        android:id="@+id/statusRadioGroup"
         android:layout_width="0dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginLeft="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
+        android:checkedButton="@+id/radioButtonTodo"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tasks_notes_tv">
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toStartOf="@id/status_tv"
+        app:layout_constraintTop_toBottomOf="@+id/status_tv">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleNotes"
-            android:layout_width="match_parent"
+        <RadioButton
+            android:id="@+id/radioButtonTodo"
+            style="@style/Widget.Material3.CompoundButton.RadioButton"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:text="Todo" />
 
-    </LinearLayout>
+        <RadioButton
+            android:id="@+id/radioButtonInProgress"
+            style="@style/Widget.Material3.CompoundButton.RadioButton"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="In Progress" />
 
-    <ImageButton
-        android:id="@+id/add_note_btn"
-        android:layout_width="74dp"
-        android:layout_height="24dp"
-        android:layout_marginTop="7dp"
-        android:background="@null"
-        android:scaleType="fitCenter"
-        app:layout_constraintStart_toStartOf="@+id/linearLayout3"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3"
-        app:srcCompat="@drawable/add_note_btn" />
+        <RadioButton
+            android:id="@+id/radioButtonCompleted"
+            style="@style/Widget.Material3.CompoundButton.RadioButton"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Completed" />
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/deadline_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Deadline"
+        android:textColor="@color/brown"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/statusRadioGroup" />
+
+    <EditText
+        android:id="@+id/inputDeadline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textbox"
+        android:ems="15"
+        android:inputType="date"
+        android:paddingStart="30px"
+        android:hint="Your task's deadline."
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="@+id/deadline_tv"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/deadline_tv"
+        app:layout_constraintTop_toBottomOf="@+id/deadline_tv" />
+
+    <Button
+        android:id="@+id/add_task_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#67A276"
+        android:text="SAVE"
+        android:textAllCaps="false"
+        app:cornerRadius="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputDeadline" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"

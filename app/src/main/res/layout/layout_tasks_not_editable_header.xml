@@ -58,6 +58,7 @@
             android:textSize="12sp"
             android:textStyle="bold"
             android:maxLength="14"/>
+
     </TableRow>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
