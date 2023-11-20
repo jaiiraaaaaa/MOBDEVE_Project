@@ -1,6 +1,6 @@
 package com.example.planify
 
-import java.util.Date
+import java.io.Serializable
 
 data class TaskModel(
     val id: Int,
@@ -8,4 +8,4 @@ data class TaskModel(
     val subject: String,
     val status: String,
     val deadline: String
-)
+): Serializable

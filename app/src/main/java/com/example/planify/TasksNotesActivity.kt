@@ -1,12 +1,15 @@
 package com.example.planify
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planify.databinding.ActivityTasksNoteBinding
@@ -15,20 +18,6 @@ class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(note: NoteModel) {
         val titleTextView = itemView.findViewById<TextView>(R.id.note_name)
         titleTextView.text = note.title
-    }
-}
-class NoteAdapter(private val notes: List<NoteModel>) : RecyclerView.Adapter<NoteViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_notes_row, parent, false)
-        return NoteViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
-        val note = notes[position]
-        holder.bind(note)
-    }
-    override fun getItemCount(): Int {
-        return notes.size
     }
 }
 
@@ -57,18 +46,18 @@ class TasksNotesActivity : AppCompatActivity() {
     //Tasks vars
     private lateinit var tasksRecyclerView: RecyclerView
     private lateinit var tasksAdapter: TaskEditableRecyclerView
-    private var tasks = mutableListOf<TaskModel>()
+    private lateinit var tasks: MutableList<TaskModel>
 
     // Notes vars
     private lateinit var notesRecyclerView: RecyclerView
     private lateinit var notesAdapter: NoteRecyclerView
-    private var notes = mutableListOf<NoteModel>()
+    private lateinit var noteList: MutableList<NoteModel>
+    private val AddNoteRequest = 1
 
     // Binding
     private lateinit var binding: ActivityTasksNoteBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityTasksNoteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -91,8 +80,7 @@ class TasksNotesActivity : AppCompatActivity() {
 
         binding.addNoteBtn.setOnClickListener {
             val intent = Intent(this, AddNoteActivity::class.java)
-            startActivity(intent)
-            finish()
+            startActivityForResult(intent, AddNoteRequest)
         }
 
         binding.addTaskBtn.setOnClickListener {
@@ -109,12 +97,22 @@ class TasksNotesActivity : AppCompatActivity() {
         tasksRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         // Notes Recycler View
-        notes = generateSampleNotes().toMutableList()
+        noteList = generateSampleNotes().toMutableList()
         notesRecyclerView = findViewById(R.id.recycleNotes)
-        notesAdapter = NoteRecyclerView(notes)
+        notesAdapter = NoteRecyclerView(noteList)
         notesRecyclerView.adapter = notesAdapter
         notesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == AddNoteRequest && resultCode == Activity.RESULT_OK) {
+            val note = data?.getSerializableExtra("note") as? NoteModel
+            if (note != null) {
+                notesAdapter.addNote(note)
+                Log.d("TasksNotesActivity", "Note added: $note")
+            }
+        }
     }
     private fun generateSampleNotes(): List<NoteModel> {
         return listOf(

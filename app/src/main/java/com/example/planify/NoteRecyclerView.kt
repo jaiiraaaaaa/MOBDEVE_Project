@@ -5,9 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import org.w3c.dom.Text
 
-class NoteRecyclerView(private val notesList: List<NoteModel>) : RecyclerView.Adapter<NoteRecyclerView.ViewHolder>() {
+class NoteRecyclerView(private val notesList: MutableList<NoteModel>) : RecyclerView.Adapter<NoteRecyclerView.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_notes_card, parent, false)
@@ -30,5 +29,12 @@ class NoteRecyclerView(private val notesList: List<NoteModel>) : RecyclerView.Ad
         val titleTextView: TextView = view.findViewById(R.id.note_title_tv)
         val descriptionTextView: TextView = view.findViewById(R.id.note_desc_tv)
         val dateTextView: TextView = view.findViewById(R.id.note_date_tv)
+    }
+    fun addNote(note: NoteModel) {
+        notesList.add(note)
+        notifyDataSetChanged()
+    }
+    fun returnIdCount(): Int {
+        return notesList.size + 1
     }
 }
