@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tasks_iv_header" />
 
     <EditText
-        android:id="@+id/inputTitle"
+        android:id="@+id/inputEditTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/textbox"
@@ -72,10 +72,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/inputEditTitle" />
 
     <EditText
-        android:id="@+id/inputCategory"
+        android:id="@+id/inputEditCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/textbox"
@@ -98,7 +98,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputCategory" />
+        app:layout_constraintTop_toBottomOf="@+id/inputEditCategory" />
 
     <RadioGroup
         android:id="@+id/statusRadioGroup"
@@ -152,7 +152,7 @@
         app:layout_constraintTop_toBottomOf="@+id/statusRadioGroup" />
 
     <EditText
-        android:id="@+id/inputDeadline"
+        android:id="@+id/inputEditDeadline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/textbox"
@@ -175,7 +175,7 @@
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputDeadline" />
+        app:layout_constraintTop_toBottomOf="@+id/inputEditDeadline" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"

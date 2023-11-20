@@ -44,9 +44,11 @@ class EditNoteActivity : AppCompatActivity() {
             note.description = updatedContent
 
             val returnIntent = Intent()
+            returnIntent.putExtra("isUpdate", true)
             returnIntent.putExtra("note", note)
             setResult(Activity.RESULT_OK, returnIntent)
             finish()
         }
+
     }
 }

@@ -12,12 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planify.databinding.ActivityTasksNoteBinding
 
-class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun bind(note: NoteModel) {
-        val titleTextView = itemView.findViewById<TextView>(R.id.note_name)
-        titleTextView.text = note.title
-    }
-}
 class TaskEditViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(task: TaskModel) {
         val titleTextView = itemView.findViewById<TextView>(R.id.task_name)
@@ -51,6 +45,12 @@ class TasksNotesActivity : AppCompatActivity() {
     private lateinit var noteList: MutableList<NoteModel>
     private val AddNoteRequest = 1
     private val AddTaskRequest = 2
+    companion object {
+        private const val REQUEST_CODE_ADD_NOTE = 1
+        private const val REQUEST_CODE_ADD_TASK = 2
+    }
+    private var isUpdatingNote: Boolean = false
+    private lateinit var noteToUpdate: NoteModel
 
     // Binding
     private lateinit var binding: ActivityTasksNoteBinding
@@ -78,8 +78,12 @@ class TasksNotesActivity : AppCompatActivity() {
 
         binding.addNoteBtn.setOnClickListener {
             val intent = Intent(this, AddNoteActivity::class.java)
+            if (isUpdatingNote) {
+                intent.putExtra("noteToUpdate", noteToUpdate)
+            }
             startActivityForResult(intent, AddNoteRequest)
         }
+
 
         binding.addTaskBtn.setOnClickListener {
             val intent = Intent(this, AddTaskActivity::class.java)
@@ -106,29 +110,39 @@ class TasksNotesActivity : AppCompatActivity() {
         when (requestCode) {
             AddNoteRequest -> {
                 if (resultCode == Activity.RESULT_OK) {
-                    val note = data?.getSerializableExtra("note") as? NoteModel
-                    if (note != null) {
-                        notesAdapter.addNote(note)
+                    val isUpdate = data?.getBooleanExtra("isUpdate", false) ?: false
+                    if (isUpdate) {
+                        val updatedNote = data?.getSerializableExtra("note") as? NoteModel
+                        if (updatedNote != null) {
+                            notesAdapter.updateNote(updatedNote)
+                        }
+                    } else {
+                        val note = data?.getSerializableExtra("note") as? NoteModel
+                        if (note != null) {
+                            notesAdapter.addNote(note)
+                        }
                     }
                 }
             }
             AddTaskRequest -> {
                 if (resultCode == Activity.RESULT_OK) {
-                    val task = data?.getSerializableExtra("task") as? TaskModel
-                    if (task != null) {
-                        tasksAdapter.addTask(task)
+                    val isUpdate = data?.getBooleanExtra("isUpdate", false) ?: false
+                    if (isUpdate) {
+                        val updatedTask = data?.getSerializableExtra("task") as? TaskModel
+                        if (updatedTask != null) {
+                            tasksAdapter.updateTask(updatedTask)
+                        }
+                    } else {
+                        val task = data?.getSerializableExtra("task") as? TaskModel
+                        if (task != null) {
+                            tasksAdapter.addTask(task)
+                        }
                     }
-                }
-            }
-            else -> {
-                if (resultCode == Activity.RESULT_OK) {
-                    val updatedNote = data?.getSerializableExtra("note") as NoteModel
-                    noteList[requestCode] = updatedNote
-                    notesRecyclerView.adapter?.notifyItemChanged(requestCode)
                 }
             }
         }
     }
+
 
     private fun generateSampleNotes(): List<NoteModel> {
         return listOf(

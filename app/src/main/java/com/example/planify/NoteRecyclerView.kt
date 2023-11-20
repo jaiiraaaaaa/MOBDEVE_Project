@@ -47,4 +47,13 @@ class NoteRecyclerView(private val notesList: MutableList<NoteModel>) : Recycler
     fun returnIdCount(): Int {
         return notesList.size + 1
     }
+    fun updateNote(updatedNote: NoteModel) {
+        val index = notesList.indexOfFirst { it.id == updatedNote.id }
+        if (index != -1) {
+            notesList[index] = updatedNote
+            notifyItemChanged(index)
+            notifyDataSetChanged() // Make sure to call notifyDataSetChanged
+        }
+    }
+
 }
