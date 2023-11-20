@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import java.util.Locale
 
-class TaskEditableRecyclerView (private val tasksList: List<TaskModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TaskEditableRecyclerView (private val tasksList: MutableList<TaskModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_task_editable_row, parent, false)
         return ViewHolder(view)
@@ -44,5 +44,12 @@ class TaskEditableRecyclerView (private val tasksList: List<TaskModel>) : Recycl
         val subjectTextView: TextView = view.findViewById(R.id.task_subject)
         val statusTextView: TextView = view.findViewById(R.id.task_status)
         val deadlineTextView: TextView = view.findViewById(R.id.task_deadline)
+    }
+    fun returnIdCount(): Int {
+        return tasksList.size + 1
+    }
+    fun addTask(task: TaskModel) {
+        tasksList.add(task)
+        notifyDataSetChanged()
     }
 }

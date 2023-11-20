@@ -3,13 +3,11 @@ package com.example.planify
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planify.databinding.ActivityTasksNoteBinding
@@ -20,7 +18,6 @@ class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         titleTextView.text = note.title
     }
 }
-
 class TaskEditViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(task: TaskModel) {
         val titleTextView = itemView.findViewById<TextView>(R.id.task_name)
@@ -53,6 +50,7 @@ class TasksNotesActivity : AppCompatActivity() {
     private lateinit var notesAdapter: NoteRecyclerView
     private lateinit var noteList: MutableList<NoteModel>
     private val AddNoteRequest = 1
+    private val AddTaskRequest = 2
 
     // Binding
     private lateinit var binding: ActivityTasksNoteBinding
@@ -85,8 +83,7 @@ class TasksNotesActivity : AppCompatActivity() {
 
         binding.addTaskBtn.setOnClickListener {
             val intent = Intent(this, AddTaskActivity::class.java)
-            startActivity(intent)
-            finish()
+            startActivityForResult(intent, AddTaskRequest)
         }
 
         // Tasks Recycler View
@@ -115,6 +112,14 @@ class TasksNotesActivity : AppCompatActivity() {
                     }
                 }
             }
+            AddTaskRequest -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    val task = data?.getSerializableExtra("task") as? TaskModel
+                    if (task != null) {
+                        tasksAdapter.addTask(task)
+                    }
+                }
+            }
             else -> {
                 if (resultCode == Activity.RESULT_OK) {
                     val updatedNote = data?.getSerializableExtra("note") as NoteModel
@@ -124,6 +129,7 @@ class TasksNotesActivity : AppCompatActivity() {
             }
         }
     }
+
     private fun generateSampleNotes(): List<NoteModel> {
         return listOf(
             NoteModel(1, "Main Memory", "Sample Description of Note 1", "11/20/23" ),

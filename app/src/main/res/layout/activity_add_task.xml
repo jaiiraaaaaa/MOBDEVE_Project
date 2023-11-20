@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tasks_iv_header" />
 
     <EditText
-        android:id="@+id/inputTitle"
+        android:id="@+id/inputTaskTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/textbox"
@@ -74,10 +74,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/inputTaskTitle" />
 
     <EditText
-        android:id="@+id/inputCategory"
+        android:id="@+id/inputTaskCategory"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/textbox"
@@ -102,7 +102,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputCategory" />
+        app:layout_constraintTop_toBottomOf="@+id/inputTaskCategory" />
 
     <RadioGroup
         android:id="@+id/statusRadioGroup"
@@ -156,7 +156,7 @@
         app:layout_constraintTop_toBottomOf="@+id/statusRadioGroup" />
 
     <EditText
-        android:id="@+id/inputDeadline"
+        android:id="@+id/inputTaskDeadline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/textbox"
@@ -171,7 +171,7 @@
         app:layout_constraintTop_toBottomOf="@+id/deadline_tv" />
 
     <Button
-        android:id="@+id/add_task_btn"
+        android:id="@+id/save_task_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -181,7 +181,7 @@
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputDeadline" />
+        app:layout_constraintTop_toBottomOf="@+id/inputTaskDeadline" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
