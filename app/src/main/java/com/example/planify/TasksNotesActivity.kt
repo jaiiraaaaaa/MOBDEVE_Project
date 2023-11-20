@@ -106,11 +106,21 @@ class TasksNotesActivity : AppCompatActivity() {
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == AddNoteRequest && resultCode == Activity.RESULT_OK) {
-            val note = data?.getSerializableExtra("note") as? NoteModel
-            if (note != null) {
-                notesAdapter.addNote(note)
-                Log.d("TasksNotesActivity", "Note added: $note")
+        when (requestCode) {
+            AddNoteRequest -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    val note = data?.getSerializableExtra("note") as? NoteModel
+                    if (note != null) {
+                        notesAdapter.addNote(note)
+                    }
+                }
+            }
+            else -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    val updatedNote = data?.getSerializableExtra("note") as NoteModel
+                    noteList[requestCode] = updatedNote
+                    notesRecyclerView.adapter?.notifyItemChanged(requestCode)
+                }
             }
         }
     }

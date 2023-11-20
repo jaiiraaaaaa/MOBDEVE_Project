@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tasks_iv_header" />
 
     <EditText
-        android:id="@+id/inputTitle"
+        android:id="@+id/inputEditTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/textbox"
@@ -72,10 +72,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/inputEditTitle" />
 
     <EditText
-        android:id="@+id/inputDate"
+        android:id="@+id/inputEditDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/textbox"
@@ -98,10 +98,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputDate" />
+        app:layout_constraintTop_toBottomOf="@+id/inputEditDate" />
 
     <EditText
-        android:id="@+id/inputContent"
+        android:id="@+id/inputEditContent"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
         android:background="@drawable/tasks_body_cell_bg"
@@ -124,7 +124,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputContent" />
+        app:layout_constraintTop_toBottomOf="@+id/inputEditContent" />
 
     <Button
         android:id="@+id/notes_add_attachment_btn"
@@ -143,7 +143,7 @@
         app:layout_constraintStart_toStartOf="@id/attachments_tv"/>
 
     <Button
-        android:id="@+id/add_task_btn"
+        android:id="@+id/save_edit_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
