@@ -14,19 +14,19 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.TimeZone
 
-class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class TaskNotEditViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(task: TaskModel) {
         val titleTextView = itemView.findViewById<TextView>(R.id.task_name)
         titleTextView.text = task.title
     }
 }
-class TaskAdapter(private val tasks: List<TaskModel>) : RecyclerView.Adapter<TaskViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
+class TaskNotEditAdapter(private val tasks: List<TaskModel>) : RecyclerView.Adapter<TaskNotEditViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskNotEditViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_tasks_row, parent, false)
-        return TaskViewHolder(view)
+        return TaskNotEditViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TaskNotEditViewHolder, position: Int) {
         val task = tasks[position]
         holder.bind(task)
     }
@@ -36,9 +36,12 @@ class TaskAdapter(private val tasks: List<TaskModel>) : RecyclerView.Adapter<Tas
 }
 class DashboardActivity : AppCompatActivity() {
 
+    // Tasks Recycler View vars
     private lateinit var tasksRecyclerView: RecyclerView
     private lateinit var tasksAdapter: TaskNotEditRecyclerView
     private var tasks = mutableListOf<TaskModel>()
+
+    // Binding
     private lateinit var binding: ActivityDashboardBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -63,6 +66,7 @@ class DashboardActivity : AppCompatActivity() {
             finish()
         }
 
+        // Tasks Dashboard Recycler View
         tasks = generateSampleTasks().toMutableList()
         tasksRecyclerView = findViewById(R.id.recycleTasksDashboard)
         tasksAdapter = TaskNotEditRecyclerView(tasks)
@@ -71,11 +75,10 @@ class DashboardActivity : AppCompatActivity() {
     }
 
     private fun generateSampleTasks(): List<TaskModel> {
-
         return listOf(
             TaskModel(1, "Project3", "MOBDEVE", "In progress", "11/20/23"),
-            TaskModel(2,"MCO2", "CSOPESY", "Todo", "11/21/23"),
-            TaskModel(3,"Final Proj", "STINTSY", "Todo", "12/02/23")
+            TaskModel(2,"MCO2", "CSOPESY", "Todo", "11/20/23"),
+            TaskModel(3,"Final Proj", "STINTSY", "Todo", "12/20/23"),
         )
     }
 }

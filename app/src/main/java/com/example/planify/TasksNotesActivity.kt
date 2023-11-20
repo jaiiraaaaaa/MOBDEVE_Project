@@ -31,11 +31,40 @@ class NoteAdapter(private val notes: List<NoteModel>) : RecyclerView.Adapter<Not
         return notes.size
     }
 }
+
+class TaskEditViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    fun bind(task: TaskModel) {
+        val titleTextView = itemView.findViewById<TextView>(R.id.task_name)
+        titleTextView.text = task.title
+    }
+}
+class TaskEditAdapter(private val tasks: List<TaskModel>) : RecyclerView.Adapter<TaskEditViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskEditViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_tasks_row, parent, false)
+        return TaskEditViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: TaskEditViewHolder, position: Int) {
+        val task = tasks[position]
+        holder.bind(task)
+    }
+    override fun getItemCount(): Int {
+        return tasks.size
+    }
+}
 class TasksNotesActivity : AppCompatActivity() {
 
+    //Tasks vars
+    private lateinit var tasksRecyclerView: RecyclerView
+    private lateinit var tasksAdapter: TaskEditableRecyclerView
+    private var tasks = mutableListOf<TaskModel>()
+
+    // Notes vars
     private lateinit var notesRecyclerView: RecyclerView
     private lateinit var notesAdapter: NoteRecyclerView
     private var notes = mutableListOf<NoteModel>()
+
+    // Binding
     private lateinit var binding: ActivityTasksNoteBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,6 +101,14 @@ class TasksNotesActivity : AppCompatActivity() {
             finish()
         }
 
+        // Tasks Recycler View
+        tasks = generateSampleTasks().toMutableList()
+        tasksRecyclerView = findViewById(R.id.recycleTasks)
+        tasksAdapter = TaskEditableRecyclerView(tasks)
+        tasksRecyclerView.adapter = tasksAdapter
+        tasksRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        // Notes Recycler View
         notes = generateSampleNotes().toMutableList()
         notesRecyclerView = findViewById(R.id.recycleNotes)
         notesAdapter = NoteRecyclerView(notes)
@@ -84,6 +121,15 @@ class TasksNotesActivity : AppCompatActivity() {
             NoteModel(1, "Main Memory", "Sample Description of Note 1", "11/20/23" ),
             NoteModel(2,"MP Specs", "Sample Description of Note 2", "11/21/23"),
             NoteModel(3,"Deadlines", "Sample Description of Note 2", "11/21/23"),
+        )
+    }
+
+    private fun generateSampleTasks(): List<TaskModel> {
+        return listOf(
+            TaskModel(1, "Project3", "MOBDEVE", "In progress", "11/20/23"),
+            TaskModel(2,"MCO2", "CSOPESY", "Todo", "11/20/23"),
+            TaskModel(3,"Final Proj", "STINTSY", "Todo", "12/20/23"),
+            TaskModel(4,"Notebook", "STINTSY", "Completed", "11/20/23")
         )
     }
 }
