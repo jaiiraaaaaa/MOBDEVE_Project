@@ -33,6 +33,12 @@ class AddNoteActivity : AppCompatActivity() {
             finish()
         })
 
+        binding.taskNav.setOnClickListener (View.OnClickListener {
+            val intent = Intent(this, TasksNotesActivity::class.java)
+            startActivity(intent)
+            finish()
+        })
+
         binding.calendarNav.setOnClickListener {
             val intent = Intent(this, CalendarActivity::class.java)
             startActivity(intent)

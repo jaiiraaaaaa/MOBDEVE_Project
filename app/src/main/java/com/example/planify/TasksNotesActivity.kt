@@ -34,7 +34,7 @@ class NoteAdapter(private val notes: List<NoteModel>) : RecyclerView.Adapter<Not
 class TasksNotesActivity : AppCompatActivity() {
 
     private lateinit var notesRecyclerView: RecyclerView
-    private lateinit var notesAdapter: HorizontalRecyclerView
+    private lateinit var notesAdapter: NoteRecyclerView
     private var notes = mutableListOf<NoteModel>()
     private lateinit var binding: ActivityTasksNoteBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,15 +74,16 @@ class TasksNotesActivity : AppCompatActivity() {
 
         notes = generateSampleNotes().toMutableList()
         notesRecyclerView = findViewById(R.id.recycleNotes)
-        notesAdapter = HorizontalRecyclerView(notes)
+        notesAdapter = NoteRecyclerView(notes)
         notesRecyclerView.adapter = notesAdapter
         notesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
     }
     private fun generateSampleNotes(): List<NoteModel> {
         return listOf(
-            NoteModel(1, "Note 1", "Description", "11/20/23" ),
-            NoteModel(2,"Note 2", "Description", "11/21/23"),
+            NoteModel(1, "Main Memory", "Sample Description of Note 1", "11/20/23" ),
+            NoteModel(2,"MP Specs", "Sample Description of Note 2", "11/21/23"),
+            NoteModel(3,"Deadlines", "Sample Description of Note 2", "11/21/23"),
         )
     }
 }

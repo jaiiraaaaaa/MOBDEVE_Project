@@ -2,11 +2,43 @@ package com.example.planify
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.planify.databinding.ActivityDashboardBinding
+import java.text.SimpleDateFormat
+import java.util.Locale
+import java.util.TimeZone
 
+class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    fun bind(task: TaskModel) {
+        val titleTextView = itemView.findViewById<TextView>(R.id.task_name)
+        titleTextView.text = task.title
+    }
+}
+class TaskAdapter(private val tasks: List<TaskModel>) : RecyclerView.Adapter<TaskViewHolder>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_tasks_row, parent, false)
+        return TaskViewHolder(view)
+    }
+
+    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
+        val task = tasks[position]
+        holder.bind(task)
+    }
+    override fun getItemCount(): Int {
+        return tasks.size
+    }
+}
 class DashboardActivity : AppCompatActivity() {
+
+    private lateinit var tasksRecyclerView: RecyclerView
+    private lateinit var tasksAdapter: TaskNotEditRecyclerView
+    private var tasks = mutableListOf<TaskModel>()
     private lateinit var binding: ActivityDashboardBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,5 +63,19 @@ class DashboardActivity : AppCompatActivity() {
             finish()
         }
 
+        tasks = generateSampleTasks().toMutableList()
+        tasksRecyclerView = findViewById(R.id.recycleTasksDashboard)
+        tasksAdapter = TaskNotEditRecyclerView(tasks)
+        tasksRecyclerView.adapter = tasksAdapter
+        tasksRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+    }
+
+    private fun generateSampleTasks(): List<TaskModel> {
+
+        return listOf(
+            TaskModel(1, "Project3", "MOBDEVE", "In progress", "11/20/23"),
+            TaskModel(2,"MCO2", "CSOPESY", "Todo", "11/21/23"),
+            TaskModel(3,"Final Proj", "STINTSY", "Todo", "12/02/23")
+        )
     }
 }
