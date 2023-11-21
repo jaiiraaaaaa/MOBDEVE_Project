@@ -48,7 +48,6 @@ class DashboardActivity : AppCompatActivity() {
         this.binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(this.binding.root)
 
-
         binding.logoutBtn.setOnClickListener {
             startActivity(Intent(this, MainActivity:: class.java))
             finish()

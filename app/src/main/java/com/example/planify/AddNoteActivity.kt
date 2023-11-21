@@ -23,19 +23,24 @@ class AddNoteActivity : AppCompatActivity() {
         noteList = intent.getSerializableExtra("noteList") as? MutableList<NoteModel> ?: mutableListOf()
         notesAdapter = NoteRecyclerView(noteList)
 
-        binding.logoutBtn.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
+        binding.dashboardNav.setOnClickListener {
+            startActivity(Intent(this, DashboardActivity:: class.java))
             finish()
         }
 
-        binding.dashboardNav.setOnClickListener {
-            val intent = Intent(this, DashboardActivity::class.java)
+        binding.logoutBtn.setOnClickListener {
+            startActivity(Intent(this, MainActivity:: class.java))
+            finish()
+        }
+
+        binding.taskNav.setOnClickListener (View.OnClickListener {
+            val intent = Intent(this, TasksNotesActivity::class.java)
             startActivity(intent)
             finish()
-        }
+        })
 
-        binding.taskNav.setOnClickListener {
-            val intent = Intent(this, TasksNotesActivity::class.java)
+        binding.calendarNav.setOnClickListener {
+            val intent = Intent(this, CalendarActivity::class.java)
             startActivity(intent)
             finish()
         }
@@ -53,7 +58,7 @@ class AddNoteActivity : AppCompatActivity() {
             val content = binding.inputContent.text.toString()
 
             if (title.isNotEmpty() && date.isNotEmpty() && content.isNotEmpty()) {
-                val note = NoteModel(notesAdapter.returnIdCount(), title, date, content)
+                val note = NoteModel(notesAdapter.returnIdCount(), title, content, date)
                 returnIntent.putExtra("note", note)
                 setResult(Activity.RESULT_OK, returnIntent)
             } else {

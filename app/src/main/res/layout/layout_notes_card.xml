@@ -70,7 +70,7 @@
             android:layout_gravity="bottom|center"
             android:layout_margin="11dp"
             android:fontFamily="sans-serif"
-            android:text="10/20/23"
+            android:text="MM/DD/YY"
             android:textAlignment="center"
             android:textSize="6sp" />
 

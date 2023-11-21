@@ -157,12 +157,25 @@
         android:layout_height="wrap_content"
         android:background="@drawable/textbox"
         android:ems="15"
-        android:inputType="date"
+        android:inputType="text"
         android:paddingStart="30px"
         app:layout_constraintEnd_toEndOf="@+id/deadline_tv"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/deadline_tv"
         app:layout_constraintTop_toBottomOf="@+id/deadline_tv" />
+
+    <Button
+        android:id="@+id/delete_task_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:backgroundTint="#a13f38"
+        android:text="DELETE"
+        android:textAllCaps="false"
+        app:cornerRadius="50dp"
+        app:layout_constraintEnd_toEndOf="@id/edit_task_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputEditDeadline" />
 
     <Button
         android:id="@+id/edit_task_btn"
@@ -174,7 +187,7 @@
         android:textAllCaps="false"
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/delete_task_btn"
         app:layout_constraintTop_toBottomOf="@+id/inputEditDeadline" />
 
     <LinearLayout

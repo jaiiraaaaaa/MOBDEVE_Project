@@ -11,7 +11,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class NoteRecyclerView(private val notesList: MutableList<NoteModel>) : RecyclerView.Adapter<NoteRecyclerView.ViewHolder>() {
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_notes_card, parent, false)
         return ViewHolder(view)

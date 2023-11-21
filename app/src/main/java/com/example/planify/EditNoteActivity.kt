@@ -3,10 +3,13 @@ package com.example.planify
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import com.example.planify.NoteModel
+import com.example.planify.databinding.ActivityDashboardBinding
+import com.example.planify.databinding.ActivityEditNoteBinding
 
 class EditNoteActivity : AppCompatActivity() {
 
@@ -14,10 +17,41 @@ class EditNoteActivity : AppCompatActivity() {
     private lateinit var dateEditText: EditText
     private lateinit var contentEditText: EditText
     private lateinit var note: NoteModel
+    private lateinit var noteList: MutableList<NoteModel>
+    private lateinit var noteAdapter: NoteRecyclerView
+
+    // Binding
+    private lateinit var binding: ActivityEditNoteBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_edit_note)
+        this.binding = ActivityEditNoteBinding.inflate(layoutInflater)
+        setContentView(this.binding.root)
+
+        noteList = intent.getSerializableExtra("noteList") as? MutableList<NoteModel> ?: mutableListOf()
+        noteAdapter = NoteRecyclerView(noteList)
+
+        binding.dashboardNav.setOnClickListener {
+            startActivity(Intent(this, DashboardActivity:: class.java))
+            finish()
+        }
+
+        binding.logoutBtn.setOnClickListener {
+            startActivity(Intent(this, MainActivity:: class.java))
+            finish()
+        }
+
+        binding.taskNav.setOnClickListener (View.OnClickListener {
+            val intent = Intent(this, TasksNotesActivity::class.java)
+            startActivity(intent)
+            finish()
+        })
+
+        binding.calendarNav.setOnClickListener {
+            val intent = Intent(this, CalendarActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
 
         titleEditText = findViewById(R.id.inputEditTitle)
         dateEditText = findViewById(R.id.inputEditDate)
@@ -31,7 +65,7 @@ class EditNoteActivity : AppCompatActivity() {
         dateEditText.setText(note.date)
         contentEditText.setText(note.description)
 
-        val saveButton: Button = findViewById(R.id.save_edit_btn)
+        val saveButton: Button = findViewById(R.id.edit_note_btn)
         saveButton.setOnClickListener {
             // Get the updated note content
             val updatedTitle = titleEditText.text.toString()

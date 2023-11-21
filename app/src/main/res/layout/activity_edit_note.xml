@@ -106,7 +106,7 @@
         android:layout_height="150dp"
         android:background="@drawable/tasks_body_cell_bg"
         android:ems="15"
-        android:inputType="date"
+        android:inputType="textMultiLine"
         android:paddingStart="30px"
         app:layout_constraintEnd_toEndOf="@+id/content_tv"
         app:layout_constraintHorizontal_bias="0.0"
@@ -143,7 +143,20 @@
         app:layout_constraintStart_toStartOf="@id/attachments_tv"/>
 
     <Button
-        android:id="@+id/save_edit_btn"
+        android:id="@+id/delete_note_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:backgroundTint="#a13f38"
+        android:text="DELETE"
+        android:textAllCaps="false"
+        app:cornerRadius="50dp"
+        app:layout_constraintEnd_toEndOf="@id/edit_note_btn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/notes_add_attachment_btn" />
+
+    <Button
+        android:id="@+id/edit_note_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
@@ -152,7 +165,7 @@
         android:textAllCaps="false"
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/delete_note_btn"
         app:layout_constraintTop_toBottomOf="@+id/notes_add_attachment_btn" />
 
     <LinearLayout
