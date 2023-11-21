@@ -16,6 +16,7 @@ class EditTaskActivity : AppCompatActivity() {
     private lateinit var titleEditText: EditText
     private lateinit var categoryEditText: EditText
     private lateinit var deadlineRadioGroup: RadioGroup
+    private lateinit var deadline: EditText
     private lateinit var task: TaskModel
     private lateinit var binding: ActivityEditTaskBinding
 
@@ -49,6 +50,7 @@ class EditTaskActivity : AppCompatActivity() {
         titleEditText = findViewById(R.id.inputEditTitle)
         categoryEditText = findViewById(R.id.inputEditCategory)
         deadlineRadioGroup = findViewById(R.id.statusRadioGroup)
+        deadline = findViewById(R.id.inputEditDeadline)
 
         // Get the task that was passed from TaskRecyclerView
         task = intent.getSerializableExtra("task") as TaskModel
@@ -58,7 +60,7 @@ class EditTaskActivity : AppCompatActivity() {
         categoryEditText.setText(task.subject)
 
         // Check the appropriate radio button based on the task deadline
-        when (task.deadline) {
+        when (task.status) {
             "Todo" -> deadlineRadioGroup.check(R.id.radioButtonTodo)
             "In Progress" -> deadlineRadioGroup.check(R.id.radioButtonInProgress)
             "Completed" -> deadlineRadioGroup.check(R.id.radioButtonCompleted)
@@ -69,19 +71,22 @@ class EditTaskActivity : AppCompatActivity() {
             // Get the updated task content
             val updatedTitle = titleEditText.text.toString()
             val updatedCategory = categoryEditText.text.toString()
+            val updatedDeadline = deadline.text.toString()
 
             // Get the selected radio button from the RadioGroup
             val selectedId = deadlineRadioGroup.checkedRadioButtonId
             val radioButton = findViewById<RadioButton>(selectedId)
-            val updatedDeadline = radioButton.text.toString()
+            val updatedStatus = radioButton.text.toString()
 
             // Update the task
             task.title = updatedTitle
             task.subject = updatedCategory
             task.deadline = updatedDeadline
+            task.status = updatedStatus
 
             val returnIntent = Intent()
             returnIntent.putExtra("task", task)
+
             setResult(Activity.RESULT_OK, returnIntent)
             finish()
         }

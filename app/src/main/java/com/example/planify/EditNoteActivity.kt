@@ -3,11 +3,9 @@ package com.example.planify
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
-import com.example.planify.databinding.ActivityEditNoteBinding
 
 class EditNoteActivity : AppCompatActivity() {
 
@@ -25,10 +23,8 @@ class EditNoteActivity : AppCompatActivity() {
         dateEditText = findViewById(R.id.inputEditDate)
         contentEditText = findViewById(R.id.inputEditContent)
 
-        // Get the note that was passed from NoteRecyclerView
         note = intent.getSerializableExtra("note") as NoteModel
 
-        // Populate the EditTexts with the note data
         titleEditText.setText(note.title)
         dateEditText.setText(note.date)
         contentEditText.setText(note.description)
@@ -48,7 +44,6 @@ class EditNoteActivity : AppCompatActivity() {
             val returnIntent = Intent()
             returnIntent.putExtra("note", note)
 
-            // Set the appropriate resultCode based on the update success
             setResult(Activity.RESULT_OK, returnIntent)
             finish()
         }

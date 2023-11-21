@@ -21,6 +21,7 @@ class TasksNotesActivity : AppCompatActivity() {
     private lateinit var notesRecyclerView: RecyclerView
     private lateinit var notesAdapter: NoteRecyclerView
     private lateinit var noteList: MutableList<NoteModel>
+    private lateinit var taskList: MutableList<TaskModel>
     private val AddNoteRequest = 1
     private val AddTaskRequest = 2
     private val UpdateNoteRequest = 3
@@ -84,7 +85,7 @@ class TasksNotesActivity : AppCompatActivity() {
         Log.d("TasksNotesActivity", "onActivityResult - requestCode: $requestCode, resultCode: $resultCode")
         when (requestCode) {
             AddNoteRequest -> {
-                if (resultCode == Activity.RESULT_OK) {
+                if(resultCode == Activity.RESULT_OK) {
                     val note = data?.getSerializableExtra("note") as? NoteModel
                     if (note != null) {
                         notesAdapter.addNote(note)
@@ -92,13 +93,31 @@ class TasksNotesActivity : AppCompatActivity() {
                 }
             }
             UpdateNoteRequest -> {
-                if (resultCode == Activity.RESULT_OK) {
+                if(resultCode == Activity.RESULT_OK) {
                     val updatedNote = data?.getSerializableExtra("note") as NoteModel
                     Log.d("TasksNotesActivity", "Updated note ID: ${updatedNote.id}")
                     val position = noteList.indexOfFirst { it.id == updatedNote.id }
                     if (position != -1) {
                         noteList[position] = updatedNote
                         notesAdapter.notifyItemChanged(position)
+                    }
+                }
+            }
+            AddTaskRequest -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    val task = data?.getSerializableExtra("task") as? TaskModel
+                    Log.d("TasksNotesActivity", "AddTaskRequest result received")
+                    if (task != null) {
+                        tasksAdapter.addTask(task)
+                    }
+                }
+            }
+            UpdateTaskRequest -> {
+                if(resultCode == Activity.RESULT_OK) {
+                    val updatedTask = data?.getSerializableExtra("task") as? TaskModel
+                    if (updatedTask != null) {
+                        Log.d("TasksNotesActivity", "UpdateTaskRequest result received")
+                        tasksAdapter.updateTask(updatedTask)
                     }
                 }
             }

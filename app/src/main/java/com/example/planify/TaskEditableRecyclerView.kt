@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import java.util.Locale
 
 class TaskEditableRecyclerView(private val tasksList: MutableList<TaskModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+    private val UpdateTaskRequest = 4
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_task_editable_row, parent, false)
         return ViewHolder(view)
@@ -34,7 +35,7 @@ class TaskEditableRecyclerView(private val tasksList: MutableList<TaskModel>) : 
         editButton.setOnClickListener {
             val intent = Intent(it.context, EditTaskActivity::class.java)
             intent.putExtra("task", task)
-            (it.context as Activity).startActivityForResult(intent, position)
+            (it.context as Activity).startActivityForResult(intent, UpdateTaskRequest)
         }
     }
     override fun getItemCount(): Int {

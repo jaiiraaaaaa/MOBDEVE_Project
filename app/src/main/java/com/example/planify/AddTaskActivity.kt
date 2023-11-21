@@ -52,13 +52,9 @@ class AddTaskActivity : AppCompatActivity() {
             val radioButton = findViewById<RadioButton>(selectedId)
             val status = radioButton.text.toString()
             val deadline = binding.inputTaskDeadline.text.toString()
-            val task = TaskModel(taskAdapter.returnIdCount(), title, category, status, deadline)
+            val task = TaskModel(taskAdapter.returnIdCount(),title, category, status, deadline)
 
             returnIntent.putExtra("task", task)
-
-            // Set flag to indicate it's an add operation
-            returnIntent.putExtra("isUpdate", false)
-
             setResult(Activity.RESULT_OK, returnIntent)
             finish()
         }
