@@ -4,35 +4,12 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planify.databinding.ActivityTasksNoteBinding
 
-class TaskEditViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun bind(task: TaskModel) {
-        val titleTextView = itemView.findViewById<TextView>(R.id.task_name)
-        titleTextView.text = task.title
-    }
-}
-class TaskEditAdapter(private val tasks: List<TaskModel>) : RecyclerView.Adapter<TaskEditViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskEditViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_tasks_row, parent, false)
-        return TaskEditViewHolder(view)
-    }
-
-    override fun onBindViewHolder(holder: TaskEditViewHolder, position: Int) {
-        val task = tasks[position]
-        holder.bind(task)
-    }
-    override fun getItemCount(): Int {
-        return tasks.size
-    }
-}
 class TasksNotesActivity : AppCompatActivity() {
 
     //Tasks vars
@@ -78,9 +55,6 @@ class TasksNotesActivity : AppCompatActivity() {
 
         binding.addNoteBtn.setOnClickListener {
             val intent = Intent(this, AddNoteActivity::class.java)
-            if (isUpdatingNote) {
-                intent.putExtra("noteToUpdate", noteToUpdate)
-            }
             startActivityForResult(intent, AddNoteRequest)
         }
 
@@ -107,61 +81,25 @@ class TasksNotesActivity : AppCompatActivity() {
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        Log.d("TasksNotesActivity", "onActivityResult - requestCode: $requestCode, resultCode: $resultCode")
         when (requestCode) {
-            AddNoteRequest, UpdateNoteRequest -> {
-                handleAddOrUpdateNoteResult(requestCode,resultCode, data)
-            }
-            AddTaskRequest, UpdateTaskRequest -> {
-                handleAddOrUpdateTaskResult(requestCode,resultCode, data)
-            }
-        }
-    }
-    private fun handleAddOrUpdateNoteResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == Activity.RESULT_OK) {
-            val isUpdate = data?.getBooleanExtra("isUpdate", false) ?: false
-            if (requestCode == UpdateNoteRequest) {
-                // Handle update logic for notes
-                val updatedNote = data?.getSerializableExtra("note") as? NoteModel
-                if (updatedNote != null) {
-                    Log.d("NoteUpdate", "Updating note: $updatedNote")
-                    notesAdapter.updateNote(updatedNote)
-                    noteList[requestCode] = updatedNote
-                    notesRecyclerView.adapter?.notifyItemChanged(requestCode)
-                } else {
-                    Log.e("NoteUpdate", "Updated note is null.")
-                }
-            } else {
-                // Handle add logic for notes
-                val note = data?.getSerializableExtra("note") as? NoteModel
-                if (note != null) {
-                    Log.d("NoteAdd", "Adding note: $note")
-                    notesAdapter.addNote(note)
-                } else {
-                    Log.e("NoteAdd", "Added note is null.")
+            AddNoteRequest -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    val note = data?.getSerializableExtra("note") as? NoteModel
+                    if (note != null) {
+                        notesAdapter.addNote(note)
+                    }
                 }
             }
-        }
-    }
-    private fun handleAddOrUpdateTaskResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == Activity.RESULT_OK) {
-            val isUpdate = data?.getBooleanExtra("isUpdate", false) ?: false
-            if (requestCode == UpdateTaskRequest) {
-                // Handle update logic for tasks
-                val updatedTask = data?.getSerializableExtra("task") as? TaskModel
-                if (updatedTask != null) {
-                    Log.d("TaskUpdate", "Updating task: $updatedTask")
-                    tasksAdapter.updateTask(updatedTask)
-                } else {
-                    Log.e("TaskUpdate", "Updated task is null.")
-                }
-            } else {
-                // Handle add logic for tasks
-                val task = data?.getSerializableExtra("task") as? TaskModel
-                if (task != null) {
-                    Log.d("TaskAdd", "Adding task: $task")
-                    tasksAdapter.addTask(task)
-                } else {
-                    Log.e("TaskAdd", "Added task is null.")
+            UpdateNoteRequest -> {
+                if (resultCode == Activity.RESULT_OK) {
+                    val updatedNote = data?.getSerializableExtra("note") as NoteModel
+                    Log.d("TasksNotesActivity", "Updated note ID: ${updatedNote.id}")
+                    val position = noteList.indexOfFirst { it.id == updatedNote.id }
+                    if (position != -1) {
+                        noteList[position] = updatedNote
+                        notesAdapter.notifyItemChanged(position)
+                    }
                 }
             }
         }

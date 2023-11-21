@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.ui.AppBarConfiguration
 import com.example.planify.databinding.ActivityAddNoteBinding
 
 class AddNoteActivity : AppCompatActivity() {
 
+    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityAddNoteBinding
     private lateinit var notesAdapter: NoteRecyclerView
     private lateinit var noteList: MutableList<NoteModel>
@@ -23,15 +25,16 @@ class AddNoteActivity : AppCompatActivity() {
         noteList = intent.getSerializableExtra("noteList") as? MutableList<NoteModel> ?: mutableListOf()
         notesAdapter = NoteRecyclerView(noteList)
 
-        binding.dashboardNav.setOnClickListener {
-            startActivity(Intent(this, DashboardActivity:: class.java))
-            finish()
-        }
-
         binding.logoutBtn.setOnClickListener {
             startActivity(Intent(this, MainActivity:: class.java))
             finish()
         }
+
+        binding.dashboardNav.setOnClickListener (View.OnClickListener {
+            val intent = Intent(this, DashboardActivity::class.java)
+            startActivity(intent)
+            finish()
+        })
 
         binding.taskNav.setOnClickListener (View.OnClickListener {
             val intent = Intent(this, TasksNotesActivity::class.java)
@@ -44,21 +47,14 @@ class AddNoteActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
-        binding.calendarNav.setOnClickListener {
-            val intent = Intent(this, CalendarActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-
-        binding.addNoteBtn.setOnClickListener {
+        binding.addNoteBtn.setOnClickListener() {
             val returnIntent = Intent()
             val title = binding.inputTitle.text.toString()
             val date = binding.inputDate.text.toString()
             val content = binding.inputContent.text.toString()
 
             if (title.isNotEmpty() && date.isNotEmpty() && content.isNotEmpty()) {
-                val note = NoteModel(notesAdapter.returnIdCount(), title, content, date)
+                val note = NoteModel(notesAdapter.returnIdCount(),title, date, content)
                 returnIntent.putExtra("note", note)
                 setResult(Activity.RESULT_OK, returnIntent)
             } else {

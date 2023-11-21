@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class NoteRecyclerView(private val notesList: MutableList<NoteModel>) : RecyclerView.Adapter<NoteRecyclerView.ViewHolder>() {
+    private val UpdateNoteRequest = 3 // or any other unique integer value
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_notes_card, parent, false)
         return ViewHolder(view)
@@ -30,10 +31,12 @@ class NoteRecyclerView(private val notesList: MutableList<NoteModel>) : Recycler
         dateTextView.text = note.date
 
         expandButton.setOnClickListener {
+            Log.d("NoteRecyclerView", "Starting EditNoteActivity for note ID: ${note.id}")
             val intent = Intent(it.context, EditNoteActivity::class.java)
             intent.putExtra("note", note)
-            (it.context as Activity).startActivityForResult(intent, position)
+            (it.context as Activity).startActivityForResult(intent, UpdateNoteRequest)
         }
+
     }
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val titleTextView: TextView = view.findViewById(R.id.note_title_tv)
@@ -51,7 +54,6 @@ class NoteRecyclerView(private val notesList: MutableList<NoteModel>) : Recycler
         val index = notesList.indexOfFirst { it.id == updatedNote.id }
         if (index != -1) {
             notesList[index] = updatedNote
-            Log.d("NoteUpdate", "Updated note at index $index: $updatedNote")
             notifyItemChanged(index)
             notifyDataSetChanged() // Make sure to call notifyDataSetChanged
         } else {
