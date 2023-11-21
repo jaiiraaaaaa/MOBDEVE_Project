@@ -121,25 +121,33 @@ class TasksNotesActivity : AppCompatActivity() {
             }
             // Handles both updating and deleting when in EditTaskActivity
             UpdateTaskRequest -> {
-                if(resultCode == Activity.RESULT_OK) {
+                if (data?.getBooleanExtra("deleteTask", false) == true) {
+                    Log.d("TasksNotesActivity", "went in here")
+
+                    // Handle delete task
+                    val position = data.getIntExtra("taskPosition", -1)
+                    Log.d("TasksNotesActivity", "position val: $position")
+                    if (position != -1) {
+                        Log.e("TasksNotesActivity", "went in here 2")
+                        tasksAdapter.removeTask(position) // Call the removeTask function
+                        tasksAdapter.notifyItemRemoved(position)
+                    } else {
+                        Log.e("TasksNotesActivity", "Invalid task position received for deletion")
+                    }
+                } else {
+                    // Handle update task
                     val updatedTask = data?.getSerializableExtra("task") as? TaskModel
                     if (updatedTask != null) {
                         Log.d("TasksNotesActivity", "UpdateTaskRequest result received")
                         tasksAdapter.updateTask(updatedTask)
                     }
                 }
-                else if (resultCode == Activity.RESULT_OK && data?.getBooleanExtra("deleteTask", false) == true) {
-                    val position = data.getIntExtra("taskPosition", -1)
-                    if (position != -1) {
-                        tasksAdapter.removeTask(position) // Call the removeTask function
-                    } else {
-                        Log.e("TasksNotesActivity", "Invalid task position received for deletion")
-                    }
-                }
             }
         }
     }
-
+    fun getTaskPosition(task: TaskModel): Int {
+        return taskList.indexOfFirst { it.id == task.id }
+    }
     // Handles deleting from TaskEditableRecyclerView
     private fun showDeleteTaskDialog(task: TaskModel, position: Int) {
         val alertDialogBuilder = AlertDialog.Builder(this)

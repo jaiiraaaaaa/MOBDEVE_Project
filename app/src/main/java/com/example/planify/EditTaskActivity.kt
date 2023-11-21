@@ -20,11 +20,13 @@ class EditTaskActivity : AppCompatActivity() {
     private lateinit var deadline: EditText
     private lateinit var task: TaskModel
     private lateinit var binding: ActivityEditTaskBinding
+    private var taskPosition: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.binding = ActivityEditTaskBinding.inflate(layoutInflater)
         setContentView(this.binding.root)
+        taskPosition = intent.getIntExtra("taskPosition", -1)
 
         binding.dashboardNav.setOnClickListener {
             startActivity(Intent(this, DashboardActivity:: class.java))
@@ -112,6 +114,7 @@ class EditTaskActivity : AppCompatActivity() {
             // Notify the calling activity that the task should be deleted
             val returnIntent = Intent()
             returnIntent.putExtra("deleteTask", true)
+            returnIntent.putExtra("taskPosition", taskPosition)
             setResult(Activity.RESULT_OK, returnIntent)
             finish()
         }
