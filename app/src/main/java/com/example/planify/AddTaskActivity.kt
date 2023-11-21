@@ -23,21 +23,21 @@ class AddTaskActivity : AppCompatActivity() {
         taskAdapter = TaskEditableRecyclerView(taskList)
 
         binding.logoutBtn.setOnClickListener {
-            startActivity(Intent(this, MainActivity:: class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
 
-        binding.dashboardNav.setOnClickListener (View.OnClickListener {
+        binding.dashboardNav.setOnClickListener {
             val intent = Intent(this, DashboardActivity::class.java)
             startActivity(intent)
             finish()
-        })
+        }
 
-        binding.taskNav.setOnClickListener (View.OnClickListener {
+        binding.taskNav.setOnClickListener {
             val intent = Intent(this, TasksNotesActivity::class.java)
             startActivity(intent)
             finish()
-        })
+        }
 
         binding.calendarNav.setOnClickListener {
             val intent = Intent(this, CalendarActivity::class.java)
@@ -63,5 +63,4 @@ class AddTaskActivity : AppCompatActivity() {
             finish()
         }
     }
-
 }

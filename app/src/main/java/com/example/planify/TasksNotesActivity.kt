@@ -3,6 +3,7 @@ package com.example.planify
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,10 +46,9 @@ class TasksNotesActivity : AppCompatActivity() {
     private lateinit var noteList: MutableList<NoteModel>
     private val AddNoteRequest = 1
     private val AddTaskRequest = 2
-    companion object {
-        private const val REQUEST_CODE_ADD_NOTE = 1
-        private const val REQUEST_CODE_ADD_TASK = 2
-    }
+    private val UpdateNoteRequest = 3
+    private val UpdateTaskRequest = 4
+
     private var isUpdatingNote: Boolean = false
     private lateinit var noteToUpdate: NoteModel
 
@@ -108,42 +108,64 @@ class TasksNotesActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         when (requestCode) {
-            AddNoteRequest -> {
-                if (resultCode == Activity.RESULT_OK) {
-                    val isUpdate = data?.getBooleanExtra("isUpdate", false) ?: false
-                    if (isUpdate) {
-                        val updatedNote = data?.getSerializableExtra("note") as? NoteModel
-                        if (updatedNote != null) {
-                            notesAdapter.updateNote(updatedNote)
-                        }
-                    } else {
-                        val note = data?.getSerializableExtra("note") as? NoteModel
-                        if (note != null) {
-                            notesAdapter.addNote(note)
-                        }
-                    }
-                }
+            AddNoteRequest, UpdateNoteRequest -> {
+                handleAddOrUpdateNoteResult(requestCode,resultCode, data)
             }
-            AddTaskRequest -> {
-                if (resultCode == Activity.RESULT_OK) {
-                    val isUpdate = data?.getBooleanExtra("isUpdate", false) ?: false
-                    if (isUpdate) {
-                        val updatedTask = data?.getSerializableExtra("task") as? TaskModel
-                        if (updatedTask != null) {
-                            tasksAdapter.updateTask(updatedTask)
-                        }
-                    } else {
-                        val task = data?.getSerializableExtra("task") as? TaskModel
-                        if (task != null) {
-                            tasksAdapter.addTask(task)
-                        }
-                    }
+            AddTaskRequest, UpdateTaskRequest -> {
+                handleAddOrUpdateTaskResult(requestCode,resultCode, data)
+            }
+        }
+    }
+    private fun handleAddOrUpdateNoteResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK) {
+            val isUpdate = data?.getBooleanExtra("isUpdate", false) ?: false
+            if (requestCode == UpdateNoteRequest) {
+                // Handle update logic for notes
+                val updatedNote = data?.getSerializableExtra("note") as? NoteModel
+                if (updatedNote != null) {
+                    Log.d("NoteUpdate", "Updating note: $updatedNote")
+                    notesAdapter.updateNote(updatedNote)
+                    noteList[requestCode] = updatedNote
+                    notesRecyclerView.adapter?.notifyItemChanged(requestCode)
+                } else {
+                    Log.e("NoteUpdate", "Updated note is null.")
+                }
+            } else {
+                // Handle add logic for notes
+                val note = data?.getSerializableExtra("note") as? NoteModel
+                if (note != null) {
+                    Log.d("NoteAdd", "Adding note: $note")
+                    notesAdapter.addNote(note)
+                } else {
+                    Log.e("NoteAdd", "Added note is null.")
                 }
             }
         }
     }
-
-
+    private fun handleAddOrUpdateTaskResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (resultCode == Activity.RESULT_OK) {
+            val isUpdate = data?.getBooleanExtra("isUpdate", false) ?: false
+            if (requestCode == UpdateTaskRequest) {
+                // Handle update logic for tasks
+                val updatedTask = data?.getSerializableExtra("task") as? TaskModel
+                if (updatedTask != null) {
+                    Log.d("TaskUpdate", "Updating task: $updatedTask")
+                    tasksAdapter.updateTask(updatedTask)
+                } else {
+                    Log.e("TaskUpdate", "Updated task is null.")
+                }
+            } else {
+                // Handle add logic for tasks
+                val task = data?.getSerializableExtra("task") as? TaskModel
+                if (task != null) {
+                    Log.d("TaskAdd", "Adding task: $task")
+                    tasksAdapter.addTask(task)
+                } else {
+                    Log.e("TaskAdd", "Added task is null.")
+                }
+            }
+        }
+    }
     private fun generateSampleNotes(): List<NoteModel> {
         return listOf(
             NoteModel(1, "Main Memory", "Sample Description of Note 1", "11/20/23" ),
@@ -151,7 +173,6 @@ class TasksNotesActivity : AppCompatActivity() {
             NoteModel(3,"Deadlines", "Sample Description of Note 2", "11/21/23"),
         )
     }
-
     private fun generateSampleTasks(): List<TaskModel> {
         return listOf(
             TaskModel(1, "Project3", "MOBDEVE", "In progress", "11/20/23"),

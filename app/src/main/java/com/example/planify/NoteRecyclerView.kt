@@ -2,6 +2,7 @@ package com.example.planify
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -51,8 +52,11 @@ class NoteRecyclerView(private val notesList: MutableList<NoteModel>) : Recycler
         val index = notesList.indexOfFirst { it.id == updatedNote.id }
         if (index != -1) {
             notesList[index] = updatedNote
+            Log.d("NoteUpdate", "Updated note at index $index: $updatedNote")
             notifyItemChanged(index)
             notifyDataSetChanged() // Make sure to call notifyDataSetChanged
+        } else {
+            Log.e("NoteUpdate", "Note not found for update: $updatedNote")
         }
     }
 
