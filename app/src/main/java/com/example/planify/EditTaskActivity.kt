@@ -15,7 +15,7 @@ class EditTaskActivity : AppCompatActivity() {
 
     private lateinit var titleEditText: EditText
     private lateinit var categoryEditText: EditText
-    private lateinit var deadlineRadioGroup: RadioGroup
+    private lateinit var radioGroup: RadioGroup
     private lateinit var deadline: EditText
     private lateinit var task: TaskModel
     private lateinit var binding: ActivityEditTaskBinding
@@ -49,7 +49,7 @@ class EditTaskActivity : AppCompatActivity() {
 
         titleEditText = findViewById(R.id.inputEditTitle)
         categoryEditText = findViewById(R.id.inputEditCategory)
-        deadlineRadioGroup = findViewById(R.id.statusRadioGroup)
+        radioGroup = findViewById(R.id.statusRadioGroup)
         deadline = findViewById(R.id.inputEditDeadline)
 
         // Get the task that was passed from TaskRecyclerView
@@ -58,12 +58,13 @@ class EditTaskActivity : AppCompatActivity() {
         // Populate the EditTexts with the task data
         titleEditText.setText(task.title)
         categoryEditText.setText(task.subject)
+        deadline.setText(task.deadline)
 
         // Check the appropriate radio button based on the task deadline
         when (task.status) {
-            "Todo" -> deadlineRadioGroup.check(R.id.radioButtonTodo)
-            "In Progress" -> deadlineRadioGroup.check(R.id.radioButtonInProgress)
-            "Completed" -> deadlineRadioGroup.check(R.id.radioButtonCompleted)
+            "Todo" -> radioGroup.check(R.id.radioButtonTodo)
+            "In Progress" -> radioGroup.check(R.id.radioButtonInProgress)
+            "Completed" -> radioGroup.check(R.id.radioButtonCompleted)
         }
 
         val saveButton: Button = findViewById(R.id.edit_task_btn)
@@ -74,7 +75,7 @@ class EditTaskActivity : AppCompatActivity() {
             val updatedDeadline = deadline.text.toString()
 
             // Get the selected radio button from the RadioGroup
-            val selectedId = deadlineRadioGroup.checkedRadioButtonId
+            val selectedId = radioGroup.checkedRadioButtonId
             val radioButton = findViewById<RadioButton>(selectedId)
             val updatedStatus = radioButton.text.toString()
 
