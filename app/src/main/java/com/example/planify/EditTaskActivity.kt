@@ -1,6 +1,7 @@
 package com.example.planify
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -67,6 +68,8 @@ class EditTaskActivity : AppCompatActivity() {
             "Completed" -> radioGroup.check(R.id.radioButtonCompleted)
         }
 
+        // Save functionality
+
         val saveButton: Button = findViewById(R.id.edit_task_btn)
         saveButton.setOnClickListener {
             // Get the updated task content
@@ -91,5 +94,30 @@ class EditTaskActivity : AppCompatActivity() {
             setResult(Activity.RESULT_OK, returnIntent)
             finish()
         }
+
+        // Delete functionality
+
+        val deleteButton: Button = findViewById(R.id.delete_task_btn)
+        deleteButton.setOnClickListener {
+            showDeleteTaskDialog()
+        }
+    }
+
+    // Dialog for deleting the currently edited task
+    private fun showDeleteTaskDialog() {
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle("Delete Task")
+        alertDialogBuilder.setMessage("Are you sure you want to delete this task?")
+        alertDialogBuilder.setPositiveButton("Delete") { _, _ ->
+            // Notify the calling activity that the task should be deleted
+            val returnIntent = Intent()
+            returnIntent.putExtra("deleteTask", true)
+            setResult(Activity.RESULT_OK, returnIntent)
+            finish()
+        }
+        alertDialogBuilder.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialogBuilder.show()
     }
 }

@@ -12,6 +12,15 @@ import java.util.Locale
 
 class TaskEditableRecyclerView(private val tasksList: MutableList<TaskModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val UpdateTaskRequest = 4
+
+    // Interface to handle delete click events
+    interface OnTaskDeleteClickListener {
+        fun onTaskDeleteClick(task: TaskModel, position: Int)
+    }
+    private var onTaskDeleteClickListener: OnTaskDeleteClickListener? = null
+    fun setOnTaskDeleteClickListener(listener: OnTaskDeleteClickListener) {
+        this.onTaskDeleteClickListener = listener
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_task_editable_row, parent, false)
         return ViewHolder(view)
@@ -24,6 +33,7 @@ class TaskEditableRecyclerView(private val tasksList: MutableList<TaskModel>) : 
         val statusTextView = holder.itemView.findViewById<TextView>(R.id.task_status)
         val deadlineTextView = holder.itemView.findViewById<TextView>(R.id.task_deadline)
         val editButton = holder.itemView.findViewById<ImageButton>(R.id.task_edit_btn)
+        val deleteButton = holder.itemView.findViewById<ImageButton>(R.id.task_delete_btn)
 
         titleTextView.text = task.title
         subjectTextView.text = task.subject
@@ -35,7 +45,12 @@ class TaskEditableRecyclerView(private val tasksList: MutableList<TaskModel>) : 
         editButton.setOnClickListener {
             val intent = Intent(it.context, EditTaskActivity::class.java)
             intent.putExtra("task", task)
+            // Update task request => EditTaskActivity which handles both updating and deleting the task
             (it.context as Activity).startActivityForResult(intent, UpdateTaskRequest)
+        }
+
+        deleteButton.setOnClickListener {
+            onTaskDeleteClickListener?.onTaskDeleteClick(task, position)
         }
     }
     override fun getItemCount(): Int {
@@ -69,6 +84,12 @@ class TaskEditableRecyclerView(private val tasksList: MutableList<TaskModel>) : 
             tasksList[index] = updatedTask
             notifyItemChanged(index)
             notifyDataSetChanged() // Make sure to call notifyDataSetChanged
+        }
+    }
+    fun removeTask(position: Int) {
+        if (position in 0 until tasksList.size) {
+            tasksList.removeAt(position)
+            notifyItemRemoved(position)
         }
     }
 }

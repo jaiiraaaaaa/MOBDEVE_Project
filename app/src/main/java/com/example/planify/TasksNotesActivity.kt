@@ -1,6 +1,7 @@
 package com.example.planify
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -15,13 +16,13 @@ class TasksNotesActivity : AppCompatActivity() {
     //Tasks vars
     private lateinit var tasksRecyclerView: RecyclerView
     private lateinit var tasksAdapter: TaskEditableRecyclerView
-    private lateinit var tasks: MutableList<TaskModel>
+    private lateinit var taskList: MutableList<TaskModel>
 
     // Notes vars
     private lateinit var notesRecyclerView: RecyclerView
     private lateinit var notesAdapter: NoteRecyclerView
     private lateinit var noteList: MutableList<NoteModel>
-    private lateinit var taskList: MutableList<TaskModel>
+
     private val AddNoteRequest = 1
     private val AddTaskRequest = 2
     private val UpdateNoteRequest = 3
@@ -59,18 +60,24 @@ class TasksNotesActivity : AppCompatActivity() {
             startActivityForResult(intent, AddNoteRequest)
         }
 
-
         binding.addTaskBtn.setOnClickListener {
             val intent = Intent(this, AddTaskActivity::class.java)
             startActivityForResult(intent, AddTaskRequest)
         }
 
         // Tasks Recycler View
-        tasks = generateSampleTasks().toMutableList()
+        taskList = generateSampleTasks().toMutableList()
         tasksRecyclerView = findViewById(R.id.recycleTasks)
-        tasksAdapter = TaskEditableRecyclerView(tasks)
+        tasksAdapter = TaskEditableRecyclerView(taskList)
         tasksRecyclerView.adapter = tasksAdapter
         tasksRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        tasksAdapter.setOnTaskDeleteClickListener(object : TaskEditableRecyclerView.OnTaskDeleteClickListener {
+            override fun onTaskDeleteClick(task: TaskModel, position: Int) {
+                // Show a dialog or confirmation prompt before deleting the task
+                showDeleteTaskDialog(task, position)
+            }
+        })
 
         // Notes Recycler View
         noteList = generateSampleNotes().toMutableList()
@@ -112,6 +119,7 @@ class TasksNotesActivity : AppCompatActivity() {
                     }
                 }
             }
+            // Handles both updating and deleting when in EditTaskActivity
             UpdateTaskRequest -> {
                 if(resultCode == Activity.RESULT_OK) {
                     val updatedTask = data?.getSerializableExtra("task") as? TaskModel
@@ -120,8 +128,32 @@ class TasksNotesActivity : AppCompatActivity() {
                         tasksAdapter.updateTask(updatedTask)
                     }
                 }
+                else if (resultCode == Activity.RESULT_OK && data?.getBooleanExtra("deleteTask", false) == true) {
+                    val position = data.getIntExtra("taskPosition", -1)
+                    if (position != -1) {
+                        tasksAdapter.removeTask(position) // Call the removeTask function
+                    } else {
+                        Log.e("TasksNotesActivity", "Invalid task position received for deletion")
+                    }
+                }
             }
         }
+    }
+
+    // Handles deleting from TaskEditableRecyclerView
+    private fun showDeleteTaskDialog(task: TaskModel, position: Int) {
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle("Delete Task")
+        alertDialogBuilder.setMessage("Are you sure you want to delete this task?")
+        alertDialogBuilder.setPositiveButton("Delete") { _, _ ->
+            // Delete the task and update the UI
+            taskList.removeAt(position)
+            tasksAdapter.notifyItemRemoved(position)
+        }
+        alertDialogBuilder.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialogBuilder.show()
     }
     private fun generateSampleNotes(): List<NoteModel> {
         return listOf(
