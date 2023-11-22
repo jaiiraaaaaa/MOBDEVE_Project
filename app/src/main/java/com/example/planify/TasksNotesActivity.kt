@@ -104,7 +104,7 @@ class TasksNotesActivity : AppCompatActivity() {
                     val updatedNote = data?.getSerializableExtra("note") as NoteModel
                     Log.d("TasksNotesActivity", "Updated note ID: ${updatedNote.id}")
                     val position = noteList.indexOfFirst { it.id == updatedNote.id }
-                    if (position != -1) {
+                    if (position >= 0) {
                         noteList[position] = updatedNote
                         notesAdapter.notifyItemChanged(position)
                     }
@@ -127,10 +127,11 @@ class TasksNotesActivity : AppCompatActivity() {
                     // Handle delete task
                     val position = data.getIntExtra("taskPosition", -1)
                     Log.d("TasksNotesActivity", "position val: $position")
-                    if (position != -1) {
+                    if (position >= 0) {
                         Log.e("TasksNotesActivity", "went in here 2")
                         tasksAdapter.removeTask(position) // Call the removeTask function
                         tasksAdapter.notifyItemRemoved(position)
+                        tasksAdapter.notifyItemRangeChanged(position, taskList.size)
                     } else {
                         Log.e("TasksNotesActivity", "Invalid task position received for deletion")
                     }

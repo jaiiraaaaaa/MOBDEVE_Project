@@ -96,6 +96,6 @@ class TaskEditableRecyclerView(private val tasksList: MutableList<TaskModel>) : 
     fun removeTask(position: Int) {
         tasksList.removeAt(position)
         notifyItemRemoved(position)
-
+        notifyItemRangeChanged(position, itemCount)
     }
 }
