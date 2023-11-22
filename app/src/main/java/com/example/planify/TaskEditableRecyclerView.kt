@@ -44,7 +44,7 @@ class TaskEditableRecyclerView(private val tasksList: MutableList<TaskModel>) : 
 
         editButton.setOnClickListener {
             val intent = Intent(it.context, EditTaskActivity::class.java)
-            if(position != - 1) {
+            if(position >= 0) {
                 intent.putExtra("taskPosition", position)
                 intent.putExtra("task", task)
                 // Update task request => EditTaskActivity which handles both updating and deleting the task
@@ -89,9 +89,6 @@ class TaskEditableRecyclerView(private val tasksList: MutableList<TaskModel>) : 
             notifyItemChanged(index)
             notifyDataSetChanged() // Make sure to call notifyDataSetChanged
         }
-    }
-    fun getTaskPosition(task: TaskModel): Int {
-        return tasksList.indexOfFirst { it.id == task.id }
     }
     fun removeTask(position: Int) {
         tasksList.removeAt(position)

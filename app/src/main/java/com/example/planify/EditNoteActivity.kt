@@ -1,6 +1,7 @@
 package com.example.planify
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -14,10 +15,12 @@ class EditNoteActivity : AppCompatActivity() {
     private lateinit var contentEditText: EditText
     private lateinit var note: NoteModel
     private val UpdateNoteRequest = 3
+    private var notePosition: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_note)
+        notePosition = intent.getIntExtra("notePosition", -1)
 
         titleEditText = findViewById(R.id.inputEditTitle)
         dateEditText = findViewById(R.id.inputEditDate)
@@ -47,5 +50,27 @@ class EditNoteActivity : AppCompatActivity() {
             setResult(Activity.RESULT_OK, returnIntent)
             finish()
         }
+        val deleteButton: Button = findViewById(R.id.delete_note_btn)
+        deleteButton.setOnClickListener {
+            showDeleteNoteDialog()
+        }
+    }
+    // Dialog for deleting the currently edited note
+    private fun showDeleteNoteDialog() {
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle("Delete Note")
+        alertDialogBuilder.setMessage("Are you sure you want to delete this note?")
+        alertDialogBuilder.setPositiveButton("Delete") { _, _ ->
+            // Notify the calling activity that the task should be deleted
+            val returnIntent = Intent()
+            returnIntent.putExtra("deleteNote", true)
+            returnIntent.putExtra("notePosition", notePosition)
+            setResult(Activity.RESULT_OK, returnIntent)
+            finish()
+        }
+        alertDialogBuilder.setNegativeButton("Cancel") { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialogBuilder.show()
     }
 }

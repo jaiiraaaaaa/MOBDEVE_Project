@@ -99,10 +99,22 @@ class TasksNotesActivity : AppCompatActivity() {
                     }
                 }
             }
+            // Handles both updating and deleting when in EditNoteActivity
             UpdateNoteRequest -> {
-                if(resultCode == Activity.RESULT_OK) {
+                if(data?.getBooleanExtra("deleteNote", false) == true){
+                    Log.d("TasksNotesActivity: ", "went in here del note")
+                    val position = data.getIntExtra("notePosition", -1)
+                    if (position >= 0) {
+                        Log.d("TasksNotesActivity: ", "went in here del note if statement")
+                        notesAdapter.removeNote(position)
+                        notesAdapter.notifyItemRemoved(position)
+                        notesAdapter.notifyItemRangeChanged(position, noteList.size)
+                    } else {
+                        Log.e("TasksNotesActivity", "Invalid note position received for deletion")
+                    }
+                }
+                else if(resultCode == Activity.RESULT_OK) {
                     val updatedNote = data?.getSerializableExtra("note") as NoteModel
-                    Log.d("TasksNotesActivity", "Updated note ID: ${updatedNote.id}")
                     val position = noteList.indexOfFirst { it.id == updatedNote.id }
                     if (position >= 0) {
                         noteList[position] = updatedNote
@@ -122,20 +134,16 @@ class TasksNotesActivity : AppCompatActivity() {
             // Handles both updating and deleting when in EditTaskActivity
             UpdateTaskRequest -> {
                 if (data?.getBooleanExtra("deleteTask", false) == true) {
-                    Log.d("TasksNotesActivity", "went in here")
-
                     // Handle delete task
                     val position = data.getIntExtra("taskPosition", -1)
-                    Log.d("TasksNotesActivity", "position val: $position")
                     if (position >= 0) {
-                        Log.e("TasksNotesActivity", "went in here 2")
                         tasksAdapter.removeTask(position) // Call the removeTask function
                         tasksAdapter.notifyItemRemoved(position)
                         tasksAdapter.notifyItemRangeChanged(position, taskList.size)
                     } else {
                         Log.e("TasksNotesActivity", "Invalid task position received for deletion")
                     }
-                } else {
+                } else if(resultCode == Activity.RESULT_OK){
                     // Handle update task
                     val updatedTask = data?.getSerializableExtra("task") as? TaskModel
                     if (updatedTask != null) {
@@ -145,9 +153,6 @@ class TasksNotesActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-    fun getTaskPosition(task: TaskModel): Int {
-        return taskList.indexOfFirst { it.id == task.id }
     }
     // Handles deleting from TaskEditableRecyclerView
     private fun showDeleteTaskDialog(task: TaskModel, position: Int) {

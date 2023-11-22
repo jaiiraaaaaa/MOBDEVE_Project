@@ -33,8 +33,11 @@ class NoteRecyclerView(private val notesList: MutableList<NoteModel>) : Recycler
         expandButton.setOnClickListener {
             Log.d("NoteRecyclerView", "Starting EditNoteActivity for note ID: ${note.id}")
             val intent = Intent(it.context, EditNoteActivity::class.java)
-            intent.putExtra("note", note)
-            (it.context as Activity).startActivityForResult(intent, UpdateNoteRequest)
+            if(position >= 0) {
+                intent.putExtra("notePosition", position)
+                intent.putExtra("note", note)
+                (it.context as Activity).startActivityForResult(intent, UpdateNoteRequest)
+            }
         }
 
     }
@@ -50,15 +53,9 @@ class NoteRecyclerView(private val notesList: MutableList<NoteModel>) : Recycler
     fun returnIdCount(): Int {
         return notesList.size + 1
     }
-    fun updateNote(updatedNote: NoteModel) {
-        val index = notesList.indexOfFirst { it.id == updatedNote.id }
-        if (index != -1) {
-            notesList[index] = updatedNote
-            notifyItemChanged(index)
-            notifyDataSetChanged() // Make sure to call notifyDataSetChanged
-        } else {
-            Log.e("NoteUpdate", "Note not found for update: $updatedNote")
-        }
+    fun removeNote(position: Int) {
+        notesList.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, itemCount)
     }
-
 }
