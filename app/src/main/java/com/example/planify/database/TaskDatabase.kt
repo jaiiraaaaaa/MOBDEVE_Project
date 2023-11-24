@@ -5,7 +5,7 @@ import android.content.Context
 import android.util.Log
 import androidx.core.database.getIntOrNull
 import androidx.core.database.getStringOrNull
-import com.example.planify.TaskModel
+import com.example.planify.model.TaskModel
 
 class TaskDatabase(context: Context) {
 
@@ -66,10 +66,16 @@ class TaskDatabase(context: Context) {
                     val taskSubject= cursor.getStringOrNull(cursor.getColumnIndex("${DatabaseHandler.TASK_SUBJECT}"))
                     val taskStatus= cursor.getStringOrNull(cursor.getColumnIndex("${DatabaseHandler.TASK_STATUS}"))
                     val taskDeadline= cursor.getStringOrNull(cursor.getColumnIndex("${DatabaseHandler.TASK_DEADLINE}"))
-                    result.add(TaskModel(taskID!!, taskTitle!!, taskSubject!!, taskStatus!!,taskDeadline!!))
+                    if (taskID != null && taskTitle != null && taskSubject != null && taskStatus != null && taskDeadline != null) {
+                        result.add(TaskModel(taskID, taskTitle, taskSubject, taskStatus, taskDeadline))
+                    } else {
+                        // Handle the case where one of the values is null
+                        Log.e("TaskDatabase", "One or more values retrieved from the database is null.")
+                    }
                 }while(cursor.moveToNext())
             }
         }
+        cursor.close()
         return result
     }
 }

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.planify.model.NoteModel
 
 class NoteRecyclerView(private val notesList: ArrayList<NoteModel>) : RecyclerView.Adapter<NoteRecyclerView.ViewHolder>() {
     private val UpdateNoteRequest = 3 // or any other unique integer value

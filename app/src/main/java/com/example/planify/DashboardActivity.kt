@@ -10,9 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planify.databinding.ActivityDashboardBinding
-import java.text.SimpleDateFormat
-import java.util.Locale
-import java.util.TimeZone
+import com.example.planify.model.TaskModel
 
 class TaskNotEditViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(task: TaskModel) {

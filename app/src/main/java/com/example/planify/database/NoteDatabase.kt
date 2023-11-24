@@ -5,7 +5,7 @@ import android.content.Context
 import android.util.Log
 import androidx.core.database.getIntOrNull
 import androidx.core.database.getStringOrNull
-import com.example.planify.NoteModel
+import com.example.planify.model.NoteModel
 
 class NoteDatabase(context: Context) {
 

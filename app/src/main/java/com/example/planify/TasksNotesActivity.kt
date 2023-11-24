@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.planify.database.NoteDatabase
 import com.example.planify.database.TaskDatabase
 import com.example.planify.databinding.ActivityTasksNoteBinding
+import com.example.planify.model.NoteModel
+import com.example.planify.model.TaskModel
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -21,7 +23,8 @@ class TasksNotesActivity : AppCompatActivity() {
     //Tasks vars
     private lateinit var tasksRecyclerView: RecyclerView
     private lateinit var tasksAdapter: TaskEditableRecyclerView
-    private lateinit var taskList: MutableList<TaskModel>
+    private lateinit var taskList: ArrayList<TaskModel>
+    private lateinit var taskDatabase: TaskDatabase
 
     // Notes vars
     private lateinit var notesRecyclerView: RecyclerView
@@ -72,10 +75,11 @@ class TasksNotesActivity : AppCompatActivity() {
         }
 
         // Tasks Recycler View
-        val taskDatabase = TaskDatabase(applicationContext)
-//        taskList = generateSampleTasks().toMutableList()
+        taskDatabase = TaskDatabase(applicationContext)
+        taskList = taskDatabase.getTaskList()
+        Log.d("TasksNotesActivity", "taskList.size ${taskList.size}")
         tasksRecyclerView = findViewById(R.id.recycleTasks)
-        tasksAdapter = TaskEditableRecyclerView(taskDatabase.getTaskList())
+        tasksAdapter = TaskEditableRecyclerView(taskList)
         tasksRecyclerView.adapter = tasksAdapter
         tasksRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
@@ -134,7 +138,12 @@ class TasksNotesActivity : AppCompatActivity() {
                     val task = data?.getSerializableExtra("task") as? TaskModel
                     Log.d("TasksNotesActivity", "AddTaskRequest result received")
                     if (task != null) {
+                        val taskId = taskDatabase.addTask(task)
+                        task.id = taskId
                         tasksAdapter.addTask(task)
+                        tasksAdapter.notifyItemInserted(taskList.size - 1)
+                        Log.d("TasksNotesActivity", "Added to database")
+                        Log.d("TasksNotesActivity", "taskList.size ${taskList.size}")
                     }
                 }
             }

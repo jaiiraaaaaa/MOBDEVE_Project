@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.planify.model.TaskModel
 import java.util.Locale
 
 class TaskEditableRecyclerView(private val tasksList: ArrayList<TaskModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -28,10 +29,10 @@ class TaskEditableRecyclerView(private val tasksList: ArrayList<TaskModel>) : Re
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val task = tasksList[position]
-        val titleTextView = holder.itemView.findViewById<TextView>(R.id.task_title)
-        val subjectTextView = holder.itemView.findViewById<TextView>(R.id.task_subject)
-        val statusTextView = holder.itemView.findViewById<TextView>(R.id.task_status)
-        val deadlineTextView = holder.itemView.findViewById<TextView>(R.id.task_deadline)
+        val titleTextView = holder.itemView.findViewById<TextView>(R.id.editable_task_title)
+        val subjectTextView = holder.itemView.findViewById<TextView>(R.id.editable_task_subject)
+        val statusTextView = holder.itemView.findViewById<TextView>(R.id.editable_task_status)
+        val deadlineTextView = holder.itemView.findViewById<TextView>(R.id.editable_task_deadline)
         val editButton = holder.itemView.findViewById<ImageButton>(R.id.task_edit_btn)
         val deleteButton = holder.itemView.findViewById<ImageButton>(R.id.task_delete_btn)
 
@@ -69,10 +70,10 @@ class TaskEditableRecyclerView(private val tasksList: ArrayList<TaskModel>) : Re
         }
     }
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val titleTextView: TextView = view.findViewById(R.id.task_title)
-        val subjectTextView: TextView = view.findViewById(R.id.task_subject)
-        val statusTextView: TextView = view.findViewById(R.id.task_status)
-        val deadlineTextView: TextView = view.findViewById(R.id.task_deadline)
+        val titleTextView: TextView = view.findViewById(R.id.editable_task_title)
+        val subjectTextView: TextView = view.findViewById(R.id.editable_task_subject)
+        val statusTextView: TextView = view.findViewById(R.id.editable_task_status)
+        val deadlineTextView: TextView = view.findViewById(R.id.editable_task_deadline)
     }
     fun returnIdCount(): Int {
         return tasksList.size + 1

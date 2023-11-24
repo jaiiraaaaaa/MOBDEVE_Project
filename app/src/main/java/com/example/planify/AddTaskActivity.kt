@@ -8,6 +8,8 @@ import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
 import com.example.planify.database.TaskDatabase
 import com.example.planify.databinding.ActivityAddTaskBinding
+import com.example.planify.model.NoteModel
+import com.example.planify.model.TaskModel
 
 class AddTaskActivity : AppCompatActivity() {
 
@@ -54,7 +56,8 @@ class AddTaskActivity : AppCompatActivity() {
             val radioButton = findViewById<RadioButton>(selectedId)
             val status = radioButton.text.toString()
             val deadline = binding.inputTaskDeadline.text.toString()
-            val task = TaskModel(taskAdapter.returnIdCount(),title, category, status, deadline)
+
+            val task = TaskModel(title, category, status, deadline)
 
             returnIntent.putExtra("task", task)
             setResult(Activity.RESULT_OK, returnIntent)
