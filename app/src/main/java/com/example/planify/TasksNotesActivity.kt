@@ -6,7 +6,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,9 +30,6 @@ class TasksNotesActivity : AppCompatActivity() {
     private val AddTaskRequest = 2
     private val UpdateNoteRequest = 3
     private val UpdateTaskRequest = 4
-
-    private var isUpdatingNote: Boolean = false
-    private lateinit var noteToUpdate: NoteModel
 
     // Binding
     private lateinit var binding: ActivityTasksNoteBinding

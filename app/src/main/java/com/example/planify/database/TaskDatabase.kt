@@ -2,6 +2,9 @@ package com.example.planify.database
 
 import android.content.ContentValues
 import android.content.Context
+import android.util.Log
+import androidx.core.database.getIntOrNull
+import androidx.core.database.getStringOrNull
 import com.example.planify.TaskModel
 
 class TaskDatabase(context: Context) {
@@ -43,5 +46,30 @@ class TaskDatabase(context: Context) {
         db.delete(DatabaseHandler.TASK_TABLE, "${DatabaseHandler.TASK_ID}=?", whereArgs)
         db.close()
     }
-
+    fun getTaskList(): ArrayList<TaskModel>{
+        val result = ArrayList<TaskModel>()
+        val db = databaseHandler.readableDatabase
+        val fields = arrayOf(
+            DatabaseHandler.TASK_ID,
+            DatabaseHandler.TASK_TITLE,
+            DatabaseHandler.TASK_SUBJECT,
+            DatabaseHandler.TASK_STATUS,
+            DatabaseHandler.TASK_DEADLINE
+        )
+        val cursor = db.query("${DatabaseHandler.TASK_TABLE}", fields, null, null, null, null, null)
+        Log.d("Count", "${cursor.count}")
+        if(cursor.count > 0){
+            if(cursor.moveToFirst()){
+                do{
+                    val taskID= cursor.getIntOrNull(cursor.getColumnIndex("${DatabaseHandler.TASK_ID}"))
+                    val taskTitle= cursor.getStringOrNull(cursor.getColumnIndex("${DatabaseHandler.TASK_TITLE}"))
+                    val taskSubject= cursor.getStringOrNull(cursor.getColumnIndex("${DatabaseHandler.TASK_SUBJECT}"))
+                    val taskStatus= cursor.getStringOrNull(cursor.getColumnIndex("${DatabaseHandler.TASK_STATUS}"))
+                    val taskDeadline= cursor.getStringOrNull(cursor.getColumnIndex("${DatabaseHandler.TASK_DEADLINE}"))
+                    result.add(TaskModel(taskID!!, taskTitle!!, taskSubject!!, taskStatus!!,taskDeadline!!))
+                }while(cursor.moveToNext())
+            }
+        }
+        return result
+    }
 }
