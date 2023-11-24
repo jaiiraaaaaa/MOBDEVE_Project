@@ -6,10 +6,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.PopupMenu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.planify.databinding.ActivityTasksNoteBinding
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 class TasksNotesActivity : AppCompatActivity() {
 
@@ -63,6 +67,10 @@ class TasksNotesActivity : AppCompatActivity() {
         binding.addTaskBtn.setOnClickListener {
             val intent = Intent(this, AddTaskActivity::class.java)
             startActivityForResult(intent, AddTaskRequest)
+        }
+        binding.tasksSortBtn.setOnClickListener {
+            taskList.sortWith(compareBy { it.deadline.toDateFormat("MM/dd/yy") })
+            tasksAdapter.notifyDataSetChanged()
         }
 
         // Tasks Recycler View
@@ -168,6 +176,10 @@ class TasksNotesActivity : AppCompatActivity() {
             dialog.dismiss()
         }
         alertDialogBuilder.show()
+    }
+    fun String.toDateFormat(format: String): Date {
+        val sdf = SimpleDateFormat(format, Locale.getDefault())
+        return sdf.parse(this) ?: Date()
     }
     private fun generateSampleNotes(): List<NoteModel> {
         return listOf(
