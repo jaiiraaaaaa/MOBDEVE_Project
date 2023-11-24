@@ -6,7 +6,6 @@ import android.util.Log
 import androidx.core.database.getIntOrNull
 import androidx.core.database.getStringOrNull
 import com.example.planify.NoteModel
-import com.example.planify.TaskModel
 
 class NoteDatabase(context: Context) {
 
@@ -55,7 +54,7 @@ class NoteDatabase(context: Context) {
             DatabaseHandler.NOTE_DESCRIPTION,
             DatabaseHandler.NOTE_DATE,
         )
-        val cursor = db.query("${DatabaseHandler.TASK_TABLE}", fields, null, null, null, null, null)
+        val cursor = db.query("${DatabaseHandler.NOTE_TABLE}", fields, null, null, null, null, null)
         Log.d("Count", "${cursor.count}")
         if(cursor.count > 0){
             if(cursor.moveToFirst()){

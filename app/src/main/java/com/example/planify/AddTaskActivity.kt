@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
+import com.example.planify.database.TaskDatabase
 import com.example.planify.databinding.ActivityAddTaskBinding
 
 class AddTaskActivity : AppCompatActivity() {
@@ -16,11 +17,12 @@ class AddTaskActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val taskDatabase = TaskDatabase(applicationContext)
 
         binding = ActivityAddTaskBinding.inflate(layoutInflater)
         setContentView(binding.root)
         taskList = (intent.getSerializableExtra("taskList") as? MutableList<NoteModel> ?: mutableListOf()) as MutableList<TaskModel>
-        taskAdapter = TaskEditableRecyclerView(taskList)
+        taskAdapter = TaskEditableRecyclerView(taskDatabase.getTaskList())
 
         binding.dashboardNav.setOnClickListener {
             startActivity(Intent(this, DashboardActivity:: class.java))

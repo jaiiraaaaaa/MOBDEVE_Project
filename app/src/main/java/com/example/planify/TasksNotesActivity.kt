@@ -9,6 +9,8 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.planify.database.NoteDatabase
+import com.example.planify.database.TaskDatabase
 import com.example.planify.databinding.ActivityTasksNoteBinding
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -70,9 +72,10 @@ class TasksNotesActivity : AppCompatActivity() {
         }
 
         // Tasks Recycler View
-        taskList = generateSampleTasks().toMutableList()
+        val taskDatabase = TaskDatabase(applicationContext)
+//        taskList = generateSampleTasks().toMutableList()
         tasksRecyclerView = findViewById(R.id.recycleTasks)
-        tasksAdapter = TaskEditableRecyclerView(taskList)
+        tasksAdapter = TaskEditableRecyclerView(taskDatabase.getTaskList())
         tasksRecyclerView.adapter = tasksAdapter
         tasksRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
@@ -84,9 +87,9 @@ class TasksNotesActivity : AppCompatActivity() {
         })
 
         // Notes Recycler View
-        noteList = generateSampleNotes().toMutableList()
+        val noteDatabase = NoteDatabase(applicationContext)
         notesRecyclerView = findViewById(R.id.recycleNotes)
-        notesAdapter = NoteRecyclerView(noteList)
+        notesAdapter = NoteRecyclerView(noteDatabase.getNoteList())
         notesRecyclerView.adapter = notesAdapter
         notesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
@@ -176,20 +179,5 @@ class TasksNotesActivity : AppCompatActivity() {
     fun String.toDateFormat(format: String): Date {
         val sdf = SimpleDateFormat(format, Locale.getDefault())
         return sdf.parse(this) ?: Date()
-    }
-    private fun generateSampleNotes(): List<NoteModel> {
-        return listOf(
-            NoteModel(1, "Main Memory", "Sample Description of Note 1", "11/20/23" ),
-            NoteModel(2,"MP Specs", "Sample Description of Note 2", "11/21/23"),
-            NoteModel(3,"Deadlines", "Sample Description of Note 2", "11/21/23"),
-        )
-    }
-    private fun generateSampleTasks(): List<TaskModel> {
-        return listOf(
-            TaskModel(1, "Project3", "MOBDEVE", "In progress", "11/20/23"),
-            TaskModel(2,"MCO2", "CSOPESY", "Todo", "11/20/23"),
-            TaskModel(3,"Final Proj", "STINTSY", "Todo", "12/20/23"),
-            TaskModel(4,"Notebook", "STINTSY", "Completed", "11/20/23")
-        )
     }
 }

@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import java.util.Locale
 
-class TaskEditableRecyclerView(private val tasksList: MutableList<TaskModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TaskEditableRecyclerView(private val tasksList: ArrayList<TaskModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val UpdateTaskRequest = 4
 
     // Interface to handle delete click events

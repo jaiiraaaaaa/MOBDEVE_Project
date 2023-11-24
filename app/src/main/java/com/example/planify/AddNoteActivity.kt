@@ -7,6 +7,7 @@ import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
+import com.example.planify.database.NoteDatabase
 import com.example.planify.databinding.ActivityAddNoteBinding
 
 class AddNoteActivity : AppCompatActivity() {
@@ -18,12 +19,12 @@ class AddNoteActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        val noteDatabase = NoteDatabase(applicationContext)
         binding = ActivityAddNoteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         noteList = intent.getSerializableExtra("noteList") as? MutableList<NoteModel> ?: mutableListOf()
-        notesAdapter = NoteRecyclerView(noteList)
+        notesAdapter = NoteRecyclerView(noteDatabase.getNoteList())
 
         binding.logoutBtn.setOnClickListener {
             startActivity(Intent(this, MainActivity:: class.java))

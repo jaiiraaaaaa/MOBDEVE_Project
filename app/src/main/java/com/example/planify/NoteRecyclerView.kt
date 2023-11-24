@@ -10,7 +10,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class NoteRecyclerView(private val notesList: MutableList<NoteModel>) : RecyclerView.Adapter<NoteRecyclerView.ViewHolder>() {
+class NoteRecyclerView(private val notesList: ArrayList<NoteModel>) : RecyclerView.Adapter<NoteRecyclerView.ViewHolder>() {
     private val UpdateNoteRequest = 3 // or any other unique integer value
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_notes_card, parent, false)
