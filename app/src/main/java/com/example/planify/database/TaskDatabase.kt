@@ -20,6 +20,9 @@ class TaskDatabase(context: Context) {
 
         val contentValues = ContentValues()
         contentValues.put(DatabaseHandler.TASK_TITLE, task.title)
+        contentValues.put(DatabaseHandler.TASK_SUBJECT, task.subject)
+        contentValues.put(DatabaseHandler.TASK_STATUS, task.status)
+        contentValues.put(DatabaseHandler.TASK_DEADLINE, task.deadline)
 
         val _id = db.insert(DatabaseHandler.TASK_TABLE,null, contentValues)
         db.close()
