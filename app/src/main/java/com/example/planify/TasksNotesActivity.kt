@@ -164,6 +164,7 @@ class TasksNotesActivity : AppCompatActivity() {
                     val updatedTask = data?.getSerializableExtra("task") as? TaskModel
                     if (updatedTask != null) {
                         Log.d("TasksNotesActivity", "UpdateTaskRequest result received")
+                        taskDatabase.updateTask(updatedTask)
                         tasksAdapter.updateTask(updatedTask)
                     }
                 }
