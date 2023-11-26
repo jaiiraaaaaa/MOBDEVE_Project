@@ -15,11 +15,13 @@ class NoteDatabase(context: Context) {
         this.databaseHandler = DatabaseHandler(context)
     }
 
-    fun addTask(note: NoteModel) : Int {
+    fun addNote(note: NoteModel) : Int {
         val db = databaseHandler.writableDatabase
 
         val contentValues = ContentValues()
-        contentValues.put(DatabaseHandler.NOTE_TABLE, note.title)
+        contentValues.put(DatabaseHandler.NOTE_TITLE, note.title)
+        contentValues.put(DatabaseHandler.NOTE_DESCRIPTION, note.description)
+        contentValues.put(DatabaseHandler.NOTE_DATE, note.date)
 
         val _id = db.insert(DatabaseHandler.NOTE_TABLE,null, contentValues)
         db.close()
@@ -34,15 +36,15 @@ class NoteDatabase(context: Context) {
         contentValues.put(DatabaseHandler.NOTE_DESCRIPTION, note.description)
         contentValues.put(DatabaseHandler.NOTE_DATE, note.date)
         val whereArgs = arrayOf(note.id.toString())
-        db.update(DatabaseHandler.TASK_TABLE, contentValues, "${DatabaseHandler.NOTE_ID}=?", whereArgs)
+        db.update(DatabaseHandler.NOTE_TABLE, contentValues, "${DatabaseHandler.NOTE_ID}=?", whereArgs)
 
         db.close()
     }
-    fun deleteTask(note: NoteModel) {
+    fun deleteNote(note: NoteModel) {
         val db = databaseHandler.writableDatabase
 
         val whereArgs = arrayOf(note.id.toString())
-        db.delete(DatabaseHandler.TASK_TABLE, "${DatabaseHandler.NOTE_ID}=?", whereArgs)
+        db.delete(DatabaseHandler.NOTE_TABLE, "${DatabaseHandler.NOTE_ID}=?", whereArgs)
         db.close()
     }
     fun getNoteList(): ArrayList<NoteModel>{

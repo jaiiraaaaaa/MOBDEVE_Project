@@ -54,13 +54,10 @@ class AddNoteActivity : AppCompatActivity() {
             val date = binding.inputDate.text.toString()
             val content = binding.inputContent.text.toString()
 
-            if (title.isNotEmpty() && date.isNotEmpty() && content.isNotEmpty()) {
-                val note = NoteModel(notesAdapter.returnIdCount(),title, date, content)
-                returnIntent.putExtra("note", note)
-                setResult(Activity.RESULT_OK, returnIntent)
-            } else {
-                setResult(Activity.RESULT_CANCELED)
-            }
+            val note = NoteModel(title, content, date)
+            returnIntent.putExtra("note", note)
+            setResult(Activity.RESULT_OK, returnIntent)
+
             finish()
         }
     }

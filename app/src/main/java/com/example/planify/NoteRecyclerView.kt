@@ -51,9 +51,6 @@ class NoteRecyclerView(private val notesList: ArrayList<NoteModel>) : RecyclerVi
         notesList.add(note)
         notifyDataSetChanged()
     }
-    fun returnIdCount(): Int {
-        return notesList.size + 1
-    }
     fun removeNote(position: Int) {
         notesList.removeAt(position)
         notifyItemRemoved(position)

@@ -29,7 +29,8 @@ class TasksNotesActivity : AppCompatActivity() {
     // Notes vars
     private lateinit var notesRecyclerView: RecyclerView
     private lateinit var notesAdapter: NoteRecyclerView
-    private lateinit var noteList: MutableList<NoteModel>
+    private lateinit var noteList: ArrayList<NoteModel>
+    private lateinit var noteDatabase: NoteDatabase
 
     private val AddNoteRequest = 1
     private val AddTaskRequest = 2
@@ -91,9 +92,10 @@ class TasksNotesActivity : AppCompatActivity() {
         })
 
         // Notes Recycler View
-        val noteDatabase = NoteDatabase(applicationContext)
+        noteDatabase = NoteDatabase(applicationContext)
+        noteList = noteDatabase.getNoteList()
         notesRecyclerView = findViewById(R.id.recycleNotes)
-        notesAdapter = NoteRecyclerView(noteDatabase.getNoteList())
+        notesAdapter = NoteRecyclerView(noteList)
         notesRecyclerView.adapter = notesAdapter
         notesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
@@ -106,7 +108,10 @@ class TasksNotesActivity : AppCompatActivity() {
                 if(resultCode == Activity.RESULT_OK) {
                     val note = data?.getSerializableExtra("note") as? NoteModel
                     if (note != null) {
+                        val noteID = noteDatabase.addNote(note)
+                        note.id = noteID
                         notesAdapter.addNote(note)
+                        notesAdapter.notifyItemInserted(noteList.size - 1)
                     }
                 }
             }
@@ -129,6 +134,7 @@ class TasksNotesActivity : AppCompatActivity() {
                     val position = noteList.indexOfFirst { it.id == updatedNote.id }
                     if (position >= 0) {
                         noteList[position] = updatedNote
+                        noteDatabase.updateTask(updatedNote)
                         notesAdapter.notifyItemChanged(position)
                     }
                 }
@@ -142,8 +148,6 @@ class TasksNotesActivity : AppCompatActivity() {
                         task.id = taskId
                         tasksAdapter.addTask(task)
                         tasksAdapter.notifyItemInserted(taskList.size - 1)
-                        Log.d("TasksNotesActivity", "Added to database")
-                        Log.d("TasksNotesActivity", "taskList.size ${taskList.size}")
                     }
                 }
             }
