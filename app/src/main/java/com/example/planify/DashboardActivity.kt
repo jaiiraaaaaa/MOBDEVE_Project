@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.planify.database.TaskDatabase
 import com.example.planify.databinding.ActivityDashboardBinding
 import com.example.planify.model.TaskModel
 
@@ -37,7 +38,8 @@ class DashboardActivity : AppCompatActivity() {
     // Tasks Recycler View vars
     private lateinit var tasksRecyclerView: RecyclerView
     private lateinit var tasksAdapter: TaskNotEditRecyclerView
-    private var tasks = mutableListOf<TaskModel>()
+    private lateinit var taskDatabase: TaskDatabase
+    private var tasks = ArrayList<TaskModel>()
 
     // Binding
     private lateinit var binding: ActivityDashboardBinding
@@ -62,20 +64,13 @@ class DashboardActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
+        taskDatabase = TaskDatabase(applicationContext)
         // Tasks Dashboard Recycler View
-        tasks = generateSampleTasks().toMutableList()
+        tasks = taskDatabase.getTaskList()
         tasksRecyclerView = findViewById(R.id.recycleTasksDashboard)
         tasksAdapter = TaskNotEditRecyclerView(tasks)
         tasksRecyclerView.adapter = tasksAdapter
         tasksRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
     }
 
-    private fun generateSampleTasks(): List<TaskModel> {
-        return listOf(
-            TaskModel(1, "Project3", "MOBDEVE", "In progress", "11/20/23"),
-            TaskModel(2,"MCO2", "CSOPESY", "Todo", "11/20/23"),
-            TaskModel(3,"Final Proj", "STINTSY", "Todo", "12/20/23"),
-        )
-    }
 }
