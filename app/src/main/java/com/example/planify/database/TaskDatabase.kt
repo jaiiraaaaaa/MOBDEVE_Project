@@ -81,4 +81,50 @@ class TaskDatabase(context: Context) {
         cursor.close()
         return result
     }
+    fun getTasksForDate(date: String): ArrayList<TaskModel> {
+        val result = ArrayList<TaskModel>()
+        val db = databaseHandler.readableDatabase
+        val fields = arrayOf(
+            DatabaseHandler.TASK_ID,
+            DatabaseHandler.TASK_TITLE,
+            DatabaseHandler.TASK_SUBJECT,
+            DatabaseHandler.TASK_STATUS,
+            DatabaseHandler.TASK_DEADLINE
+        )
+
+        // Assuming TASK_DEADLINE is the name of the column storing the due date
+        val selection = "${DatabaseHandler.TASK_DEADLINE} = ?"
+        val selectionArgs = arrayOf(date)
+
+        val cursor = db.query(
+            "${DatabaseHandler.TASK_TABLE}",
+            fields,
+            selection,
+            selectionArgs,
+            null,
+            null,
+            null
+        )
+
+        if (cursor.count > 0) {
+            if (cursor.moveToFirst()) {
+                do {
+                    val taskID = cursor.getIntOrNull(cursor.getColumnIndex("${DatabaseHandler.TASK_ID}"))
+                    val taskTitle = cursor.getStringOrNull(cursor.getColumnIndex("${DatabaseHandler.TASK_TITLE}"))
+                    val taskSubject = cursor.getStringOrNull(cursor.getColumnIndex("${DatabaseHandler.TASK_SUBJECT}"))
+                    val taskStatus = cursor.getStringOrNull(cursor.getColumnIndex("${DatabaseHandler.TASK_STATUS}"))
+                    val taskDeadline = cursor.getStringOrNull(cursor.getColumnIndex("${DatabaseHandler.TASK_DEADLINE}"))
+                    if (taskID != null && taskTitle != null && taskSubject != null && taskStatus != null && taskDeadline != null) {
+                        result.add(TaskModel(taskID, taskTitle, taskSubject, taskStatus, taskDeadline))
+                    } else {
+                        // Handle the case where one of the values is null
+                        Log.e("TaskDatabase", "One or more values retrieved from the database is null.")
+                    }
+                } while (cursor.moveToNext())
+            }
+        }
+        cursor.close()
+        return result
+    }
+
 }

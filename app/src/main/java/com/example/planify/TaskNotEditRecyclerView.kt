@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.planify.model.TaskModel
 import java.util.Locale
 
-class TaskNotEditRecyclerView (private val tasksList: List<TaskModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class TaskNotEditRecyclerView (private var tasksList: List<TaskModel>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.layout_task_not_editable_row, parent, false)
         return ViewHolder(view)
@@ -46,4 +46,10 @@ class TaskNotEditRecyclerView (private val tasksList: List<TaskModel>) : Recycle
         val statusTextView: TextView = view.findViewById(R.id.task_status)
         val deadlineTextView: TextView = view.findViewById(R.id.task_deadline)
     }
+
+    fun updateTasks(newTasks: List<TaskModel>) {
+        this.tasksList = newTasks
+        notifyDataSetChanged()
+    }
+
 }
