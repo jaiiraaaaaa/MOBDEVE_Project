@@ -122,9 +122,11 @@ class TasksNotesActivity : AppCompatActivity() {
                     val position = data.getIntExtra("notePosition", -1)
                     if (position >= 0) {
                         Log.d("TasksNotesActivity: ", "went in here del note if statement")
-                        notesAdapter.removeNote(position)
+                        val note = noteList[position]
+                        noteList.removeAt(position)
+                        noteDatabase.deleteNote(note)
                         notesAdapter.notifyItemRemoved(position)
-                        notesAdapter.notifyItemRangeChanged(position, noteList.size)
+//                        notesAdapter.notifyItemRangeChanged(position, noteList.size)
                     } else {
                         Log.e("TasksNotesActivity", "Invalid note position received for deletion")
                     }
