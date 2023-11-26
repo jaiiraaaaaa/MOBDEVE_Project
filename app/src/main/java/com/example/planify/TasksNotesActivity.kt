@@ -153,9 +153,11 @@ class TasksNotesActivity : AppCompatActivity() {
                     // Handle delete task
                     val position = data.getIntExtra("taskPosition", -1)
                     if (position >= 0) {
-                        tasksAdapter.removeTask(position) // Call the removeTask function
+                        val task = taskList[position]
+                        taskList.removeAt(position) // Call the removeTask function
+                        taskDatabase.deleteTask(task)
                         tasksAdapter.notifyItemRemoved(position)
-                        tasksAdapter.notifyItemRangeChanged(position, taskList.size)
+//                        tasksAdapter.notifyItemRangeChanged(position, taskList.size)
                     } else {
                         Log.e("TasksNotesActivity", "Invalid task position received for deletion")
                     }
@@ -179,6 +181,7 @@ class TasksNotesActivity : AppCompatActivity() {
         alertDialogBuilder.setPositiveButton("Delete") { _, _ ->
             // Delete the task and update the UI
             taskList.removeAt(position)
+            taskDatabase.deleteTask(task)
             tasksAdapter.notifyItemRemoved(position)
         }
         alertDialogBuilder.setNegativeButton("Cancel") { dialog, _ ->
