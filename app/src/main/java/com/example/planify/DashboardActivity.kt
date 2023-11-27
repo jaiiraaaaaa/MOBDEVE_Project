@@ -71,6 +71,17 @@ class DashboardActivity : AppCompatActivity() {
         tasksAdapter = TaskNotEditRecyclerView(tasks)
         tasksRecyclerView.adapter = tasksAdapter
         tasksRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+        binding.dashboardTodoTv.text = countTasksWithStatus(tasks, "Todo")
+        binding.dashboardInProgressTv.text = countTasksWithStatus(tasks, "In progress")
+        binding.dashboardCompletedTv.text = countTasksWithStatus(tasks, "Completed")
+    }
+
+    private fun countTasksWithStatus(tasks: List<TaskModel>, status: String): String {
+        val count = tasks.count { it.status == status }
+        val total = tasks.size
+
+        return "$count/$total"
     }
 
 }
