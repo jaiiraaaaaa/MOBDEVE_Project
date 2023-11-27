@@ -3,6 +3,11 @@ package com.example.planify
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
+import android.gesture.Gesture
+import android.gesture.GestureLibraries
+import android.gesture.GestureLibrary
+import android.gesture.GestureOverlayView
+import android.gesture.Prediction
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -31,6 +36,9 @@ class TasksNotesActivity : AppCompatActivity() {
     private lateinit var notesAdapter: NoteRecyclerView
     private lateinit var noteList: ArrayList<NoteModel>
     private lateinit var noteDatabase: NoteDatabase
+
+    // Gesture vars
+    private lateinit var gLibrary: GestureLibrary
 
     private val AddNoteRequest = 1
     private val AddTaskRequest = 2
@@ -75,6 +83,17 @@ class TasksNotesActivity : AppCompatActivity() {
             tasksAdapter.notifyDataSetChanged()
         }
 
+        // Gestures
+        gLibrary = GestureLibraries.fromRawResource(this, R.raw.gestures)
+        if (!gLibrary.load()) {
+            finish()
+        }
+        val gestureOverlayView = findViewById<GestureOverlayView>(R.id.gestureOverlayView)
+        gestureOverlayView.addOnGesturePerformedListener { _, gesture ->
+            handleGesture(gesture)
+        }
+
+
         // Tasks Recycler View
         taskDatabase = TaskDatabase(applicationContext)
         taskList = taskDatabase.getTaskList()
@@ -99,6 +118,25 @@ class TasksNotesActivity : AppCompatActivity() {
         notesRecyclerView.adapter = notesAdapter
         notesRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
+    }
+    private fun handleGesture(gesture: Gesture) {
+        val predictions: ArrayList<Prediction> = gLibrary.recognize(gesture)
+        if (predictions.isNotEmpty()) {
+            val prediction = predictions[0]
+
+            if (prediction.score > 1) {
+                Log.d("TasksNotesActivity", "name: ${prediction.score}")
+                Log.d("TasksNotesActivity", "name: ${prediction.name}")
+                when (prediction.name) {
+                    "T" -> createNewTask() // vertical line // scroll down
+                    "N" -> createNewNote() // circle
+                    "N2" -> createNewNote() // circle
+                }
+            }
+        }
+        else{
+            Log.d("TasksNotesActivity", "invalid prediction")
+        }
     }
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -178,6 +216,16 @@ class TasksNotesActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+    private fun createNewTask() {
+        // Navigate to AddTaskActivity
+        val intent = Intent(this, AddTaskActivity::class.java)
+        startActivityForResult(intent, AddTaskRequest)
+    }
+    private fun createNewNote() {
+        // Navigate to AddNoteActivity
+        val intent = Intent(this, AddNoteActivity::class.java)
+        startActivityForResult(intent, AddNoteRequest)
     }
     // Handles deleting from TaskEditableRecyclerView
     private fun showDeleteTaskDialog(task: TaskModel, position: Int) {
