@@ -20,17 +20,22 @@ import java.util.Locale
 
 class TasksNotesActivity : AppCompatActivity() {
 
+    enum class SortingOrder {
+        ASCENDING,
+        DESCENDING
+    }
     //Tasks vars
     private lateinit var tasksRecyclerView: RecyclerView
     private lateinit var tasksAdapter: TaskEditableRecyclerView
     private lateinit var taskList: ArrayList<TaskModel>
     private lateinit var taskDatabase: TaskDatabase
-
+    private var taskCurrentSortingOrder = SortingOrder.ASCENDING
     // Notes vars
     private lateinit var notesRecyclerView: RecyclerView
     private lateinit var notesAdapter: NoteRecyclerView
     private lateinit var noteList: ArrayList<NoteModel>
     private lateinit var noteDatabase: NoteDatabase
+    private var noteCurrentSortingOrder = SortingOrder.ASCENDING
 
     private val AddNoteRequest = 1
     private val AddTaskRequest = 2
@@ -71,8 +76,30 @@ class TasksNotesActivity : AppCompatActivity() {
             startActivityForResult(intent, AddTaskRequest)
         }
         binding.tasksSortBtn.setOnClickListener {
-            taskList.sortWith(compareBy { it.deadline.toDateFormat("MM/dd/yy") })
+            when (taskCurrentSortingOrder) {
+                SortingOrder.ASCENDING -> {
+                    taskList.sortWith(compareBy { it.deadline.toDateFormat("MM/dd/yy") })
+                    taskCurrentSortingOrder = SortingOrder.DESCENDING
+                }
+                SortingOrder.DESCENDING -> {
+                    taskList.sortWith(compareByDescending { it.deadline.toDateFormat("MM/dd/yy") })
+                    taskCurrentSortingOrder = SortingOrder.ASCENDING
+                }
+            }
             tasksAdapter.notifyDataSetChanged()
+        }
+        binding.notesSortBtn.setOnClickListener {
+            when (noteCurrentSortingOrder) {
+                SortingOrder.ASCENDING -> {
+                    noteList.sortWith(compareBy { it.date.toDateFormat("MM/dd/yy") })
+                    noteCurrentSortingOrder = SortingOrder.DESCENDING
+                }
+                SortingOrder.DESCENDING -> {
+                    noteList.sortWith(compareByDescending { it.date.toDateFormat("MM/dd/yy") })
+                    noteCurrentSortingOrder = SortingOrder.ASCENDING
+                }
+            }
+            notesAdapter.notifyDataSetChanged()
         }
 
         // Tasks Recycler View
