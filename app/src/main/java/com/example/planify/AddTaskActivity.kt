@@ -64,6 +64,8 @@ class AddTaskActivity : AppCompatActivity() {
                 Toast.makeText(this, "Invalid deadline format. Please use MM/DD/YY", Toast.LENGTH_SHORT).show()
             } else {
                 // Continue with creating TaskModel and returning the result
+                Toast.makeText(this, "Task added successfully", Toast.LENGTH_SHORT).show()
+
                 val task = TaskModel(title, category, status, deadline)
                 returnIntent.putExtra("task", task)
                 setResult(Activity.RESULT_OK, returnIntent)

@@ -67,6 +67,7 @@ class AddNoteActivity : AppCompatActivity() {
                 // Show a toast warning for invalid or blank date format
                 Toast.makeText(this, "Invalid date format. Please use MM/DD/YY", Toast.LENGTH_SHORT).show()
             } else {
+                Toast.makeText(this, "Note added successfully", Toast.LENGTH_SHORT).show()
                 // Continue with creating NoteModel and returning the result
                 val note = NoteModel(title, content, currentDate)
                 returnIntent.putExtra("note", note)
