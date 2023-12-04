@@ -126,5 +126,4 @@ class TaskDatabase(context: Context) {
         cursor.close()
         return result
     }
-
 }

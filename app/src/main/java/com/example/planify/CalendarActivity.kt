@@ -36,10 +36,6 @@ class CalendarActivity : AppCompatActivity() {
         binding = ActivityCalendarBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.logoutBtn.setOnClickListener {
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
 
         binding.taskNav.setOnClickListener(View.OnClickListener {
             val intent = Intent(this, TasksNotesActivity::class.java)
@@ -52,9 +48,15 @@ class CalendarActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
+
         // Tasks Calendar Recycler View
         taskDatabase = TaskDatabase(applicationContext)
         tasks = taskDatabase.getTaskList()
+
+        // Sort by date
+        //tasks.sortWith(compareBy { it.deadline.toDateFormat("MM/dd/yy") })
+        //tasksAdapter.notifyDataSetChanged()
+
         Log.d("Tasks", tasks.joinToString("\n"))
         tasksRecyclerView = findViewById(R.id.recycleTasksCalendar)
         tasksAdapter = TaskNotEditRecyclerView(tasks)
@@ -63,8 +65,8 @@ class CalendarActivity : AppCompatActivity() {
         tasksRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         // Initialize the options and the ArrayAdapter
-        val options = arrayOf("View by Date", "View All")
-        val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, options)
+        val options = arrayOf("Selected Date", "All Dates")
+        val adapter = ArrayAdapter(this, R.layout.layout_dropdown_item, options)
 
         // Set the adapter for the AutoCompleteTextView
         binding.calendarSortBtn.setAdapter(adapter)

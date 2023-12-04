@@ -23,7 +23,7 @@
         android:layout_width="71dp"
         android:layout_height="53dp"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="310dp"
         android:src="@drawable/mobdeve___high_fidel_prototype"
         app:layout_constraintEnd_toEndOf="parent"
@@ -60,8 +60,8 @@
             android:id="@+id/dashboard_welcome_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="Welcome back,"
+            android:fontFamily="sans-serif-black"
+            android:text="Welcome back!"
             android:textColor="@color/brown"
             android:textSize="18sp" />
 
@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:text="Jane Doe"
+            android:text="Your Time, Your Plan, Your Way: Planify"
             android:textSize="13.5sp"
             android:textStyle="italic" />
     </LinearLayout>
@@ -79,7 +79,7 @@
         android:id="@+id/dashboard_rounded_border"
         android:layout_width="380dp"
         android:layout_height="29dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dashboard_iv_header"
@@ -92,7 +92,7 @@
         android:fontFamily="sans-serif-black"
         android:textColor="@color/brown"
         android:textSize="15sp"
-        android:text="Tasks Status"
+        android:text="TASKS STATUS"
         app:layout_constraintBottom_toBottomOf="@+id/dashboard_rounded_border"
         app:layout_constraintEnd_toEndOf="@+id/dashboard_rounded_border"
         app:layout_constraintStart_toStartOf="@+id/dashboard_rounded_border"
@@ -134,7 +134,7 @@
         android:id="@+id/dashboard_todo_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="90dp"
         android:text="1 / N"
         android:textSize="20sp"
         android:fontFamily="sans-serif-black"
@@ -147,7 +147,7 @@
         android:id="@+id/dashboard_in_progress_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="90dp"
         android:text="1 / N"
         android:textSize="20sp"
         android:fontFamily="sans-serif-black"
@@ -160,7 +160,7 @@
         android:id="@+id/dashboard_completed_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="90dp"
         android:text="1 / N"
         android:textSize="20sp"
         android:fontFamily="sans-serif-black"
@@ -186,7 +186,7 @@
         android:fontFamily="sans-serif-black"
         android:textColor="@color/brown"
         android:textSize="15sp"
-        android:text="Tasks Todo and In Progress"
+        android:text="TASKS OVERVIEW"
         app:layout_constraintBottom_toBottomOf="@+id/dashboard_rounded_border2"
         app:layout_constraintEnd_toEndOf="@+id/dashboard_rounded_border2"
         app:layout_constraintStart_toStartOf="@+id/dashboard_rounded_border2"
@@ -203,6 +203,7 @@
         app:layout_constraintTop_toBottomOf="@+id/dashboard_rounded_border2" />
 
     <LinearLayout
+        android:id="@id/linearLayout1"
         android:layout_width="367dp"
         android:layout_height="150dp"
         android:layout_marginTop="3dp"
@@ -217,7 +218,7 @@
             android:orientation="vertical"
             android:layout_width="367dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="1dp"
             android:layout_marginBottom="10dp"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
             app:layout_constraintEnd_toEndOf="parent"
@@ -225,6 +226,18 @@
             app:layout_constraintTop_toBottomOf="@+id/dashboard_rounded_border2" />
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/random_shapes_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout1"
+        app:srcCompat="@drawable/random_shapes" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -307,30 +320,6 @@
                 android:layout_height="wrap_content"
                 android:text="Calendar"
                 android:textAlignment="center" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/logoutBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="-10px"
-                android:backgroundTint="#00FFFFFF"
-                android:contentDescription="log out button"
-                android:minHeight="48dp"
-                app:srcCompat="@drawable/baseline_logout_24" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Log Out"
-                android:textAlignment="center"/>
         </LinearLayout>
 
     </LinearLayout>

@@ -11,13 +11,8 @@ class MainActivity : AppCompatActivity() {
         val viewBinding: ActivityMainBinding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(viewBinding.root)
 
-        viewBinding.mainBtnRegister.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            this.startActivity(intent)
-        }
-
-        viewBinding.mainBtnLogin.setOnClickListener {
-            val intent = Intent(this, LoginActivity::class.java)
+        viewBinding.mainBtnContinue.setOnClickListener {
+            val intent = Intent(this, DashboardActivity::class.java)
             this.startActivity(intent)
         }
     }

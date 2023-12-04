@@ -66,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Date"
+        android:text="Date Created"
         android:textColor="@color/brown"
         android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,8 +80,10 @@
         android:layout_height="wrap_content"
         android:background="@drawable/textbox"
         android:ems="15"
-        android:inputType="text"
+        android:inputType="none"
         android:paddingStart="30px"
+        android:focusableInTouchMode="false"
+        android:focusable="false"
         app:layout_constraintEnd_toEndOf="@+id/date_tv"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/date_tv"
@@ -113,60 +115,42 @@
         app:layout_constraintStart_toStartOf="@+id/content_tv"
         app:layout_constraintTop_toBottomOf="@+id/content_tv" />
 
-    <TextView
-        android:id="@+id/attachments_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Optional Attachment/s"
-        android:textColor="@color/brown"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/inputEditContent" />
-
-    <Button
-        android:id="@+id/notes_add_attachment_btn"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginBottom="5dp"
-        android:backgroundTint="@color/dark_gray"
-        android:fontFamily="sans-serif-black"
-        android:text="Add Attachment"
-        android:textColor="@color/white"
-        android:textSize="13sp"
-        app:strokeColor="@color/white"
-        app:strokeWidth="2dp"
-        app:layout_constraintTop_toBottomOf="@id/attachments_tv"
-        app:layout_constraintStart_toStartOf="@id/attachments_tv"/>
-
     <Button
         android:id="@+id/delete_note_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="#a13f38"
         android:text="DELETE"
         android:textAllCaps="false"
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="@id/edit_note_btn"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notes_add_attachment_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/inputEditContent" />
 
     <Button
         android:id="@+id/edit_note_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="20dp"
         android:backgroundTint="#67A276"
         android:text="SAVE"
         android:textAllCaps="false"
         app:cornerRadius="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/delete_note_btn"
-        app:layout_constraintTop_toBottomOf="@+id/notes_add_attachment_btn" />
+        app:layout_constraintTop_toBottomOf="@+id/inputEditContent" />
+
+    <ImageView
+        android:id="@+id/random_shapes_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delete_note_btn"
+        app:srcCompat="@drawable/random_shapes" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -249,30 +233,6 @@
                 android:layout_height="wrap_content"
                 android:text="Calendar"
                 android:textAlignment="center" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <ImageButton
-                android:id="@+id/logoutBtn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="-10px"
-                android:backgroundTint="#00FFFFFF"
-                android:contentDescription="log out button"
-                android:minHeight="48dp"
-                app:srcCompat="@drawable/baseline_logout_24" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Log Out"
-                android:textAlignment="center"/>
         </LinearLayout>
 
     </LinearLayout>

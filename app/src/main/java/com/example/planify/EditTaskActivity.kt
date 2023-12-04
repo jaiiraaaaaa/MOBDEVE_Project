@@ -10,6 +10,7 @@ import android.widget.EditText
 import android.widget.RadioButton
 import androidx.appcompat.app.AppCompatActivity
 import android.widget.RadioGroup
+import android.widget.Toast
 import com.example.planify.databinding.ActivityEditTaskBinding
 import com.example.planify.model.TaskModel
 
@@ -31,11 +32,6 @@ class EditTaskActivity : AppCompatActivity() {
 
         binding.dashboardNav.setOnClickListener {
             startActivity(Intent(this, DashboardActivity:: class.java))
-            finish()
-        }
-
-        binding.logoutBtn.setOnClickListener {
-            startActivity(Intent(this, MainActivity:: class.java))
             finish()
         }
 
@@ -85,17 +81,32 @@ class EditTaskActivity : AppCompatActivity() {
             val radioButton = findViewById<RadioButton>(selectedId)
             val updatedStatus = radioButton.text.toString()
 
-            // Update the task
-            task.title = updatedTitle
-            task.subject = updatedCategory
-            task.deadline = updatedDeadline
-            task.status = updatedStatus
+            // Check for empty fields
+            if (updatedTitle.isBlank() || updatedCategory.isBlank() || updatedDeadline.isBlank()) {
+                // Show a toast warning for empty fields
+                Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show()
+            } else {
+                // Check for the MM/DD/YY format for the deadline
+                if (!isValidDateFormat(updatedDeadline)) {
+                    // Show a toast warning for invalid date format
+                    Toast.makeText(this, "Deadline must be in MM/DD/YY format", Toast.LENGTH_SHORT).show()
+                } else {
+                    // Update the task
+                    task.title = updatedTitle
+                    task.subject = updatedCategory
+                    task.deadline = updatedDeadline
+                    task.status = updatedStatus
 
-            val returnIntent = Intent()
-            returnIntent.putExtra("task", task)
+                    // Notify the user that the task has been updated
+                    Toast.makeText(this, "Task updated successfully", Toast.LENGTH_SHORT).show()
 
-            setResult(Activity.RESULT_OK, returnIntent)
-            finish()
+                    val returnIntent = Intent()
+                    returnIntent.putExtra("task", task)
+
+                    setResult(Activity.RESULT_OK, returnIntent)
+                    finish()
+                }
+            }
         }
 
         // Delete functionality
@@ -112,6 +123,10 @@ class EditTaskActivity : AppCompatActivity() {
         alertDialogBuilder.setTitle("Delete Task")
         alertDialogBuilder.setMessage("Are you sure you want to delete this task?")
         alertDialogBuilder.setPositiveButton("Delete") { _, _ ->
+
+            // Notify the user that the note has been deleted
+            Toast.makeText(this, "Task deleted successfully", Toast.LENGTH_SHORT).show()
+
             // Notify the calling activity that the task should be deleted
             val returnIntent = Intent()
             returnIntent.putExtra("deleteTask", true)
@@ -123,5 +138,11 @@ class EditTaskActivity : AppCompatActivity() {
             dialog.dismiss()
         }
         alertDialogBuilder.show()
+    }
+
+    // Function to check if the date has a valid MM/DD/YY format
+    private fun isValidDateFormat(date: String): Boolean {
+        val regex = Regex("""^(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/\d{2}$""")
+        return regex.matches(date)
     }
 }

@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">planify</string>
-    <string name="terms_and_service">By signing up, you agree to the <u>Terms of Service</u> and <u>Privacy Policy</u>.</string>
+    <string name="catchphrase">Your Time, Your Plan, Your Way: \n Seize the Day with Planify.</string>
     <string name="forgot_password">Forgot Password? <u>Click here</u>.</string>
     <string name="note_1">Canvas deadline will not be changed; latest you can submit is on November 4</string>
     <string name="note_2">Neural network - They come in all shapes and sizes; Hidden layer - Gives room for the network to learn other “representations” of your data to lower loss</string>
@@ -53,4 +53,5 @@
     <string name="title_activity_calendar">CalendarActivity</string>
     <string name="title_activity_add_note">AddNoteActivity</string>
     <string name="title_activity_add_task">AddTaskActivity</string>
+    <string name="title_activity_edit_notes">EditNotesActivity</string>
 </resources>

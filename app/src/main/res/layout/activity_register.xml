@@ -221,7 +221,7 @@
             android:layout_gravity="center"
             android:fontFamily="sans-serif-light"
             android:gravity="center"
-            android:text="@string/terms_and_service"
+            android:text="@string/catchphrase"
             android:textColor="@color/white"
             android:textSize="12sp"
             android:textStyle="italic" />

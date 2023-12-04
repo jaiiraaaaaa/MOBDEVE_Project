@@ -53,36 +53,24 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif-light"
         android:gravity="center"
-        android:text="@string/terms_and_service"
+        android:text="@string/catchphrase"
         android:textColor="@color/brown"
         android:textSize="12sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/main_tv_motto"
         app:layout_constraintStart_toStartOf="@+id/main_tv_motto"
-        app:layout_constraintTop_toBottomOf="@+id/main_btn_login" />
+        app:layout_constraintTop_toBottomOf="@+id/main_btn_continue" />
 
     <Button
-        android:id="@+id/main_btn_register"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/gray"
-        android:text="Register"
-        android:textColor="@color/yellow"
-        app:layout_constraintEnd_toEndOf="@+id/main_tv_motto"
-        app:layout_constraintStart_toStartOf="@+id/main_tv_motto"
-        app:layout_constraintTop_toBottomOf="@+id/main_iv_logo"
-        app:strokeColor="@color/yellow"
-        app:strokeWidth="2dp" />
-
-    <Button
-        android:id="@+id/main_btn_login"
+        android:id="@+id/main_btn_continue"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:backgroundTint="@color/yellow"
-        android:text="Log In"
+        android:text="Continue to App"
+        android:drawableEnd="@drawable/continue_arrow"
         app:layout_constraintEnd_toEndOf="@+id/main_tv_motto"
         app:layout_constraintStart_toStartOf="@+id/main_tv_motto"
-        app:layout_constraintTop_toBottomOf="@+id/main_btn_register" />
+        app:layout_constraintTop_toBottomOf="@+id/main_iv_logo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

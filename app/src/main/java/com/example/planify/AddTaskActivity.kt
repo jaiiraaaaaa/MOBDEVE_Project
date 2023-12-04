@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.planify.database.TaskDatabase
 import com.example.planify.databinding.ActivityAddTaskBinding
@@ -31,11 +32,6 @@ class AddTaskActivity : AppCompatActivity() {
             finish()
         }
 
-        binding.logoutBtn.setOnClickListener {
-            startActivity(Intent(this, MainActivity:: class.java))
-            finish()
-        }
-
         binding.taskNav.setOnClickListener (View.OnClickListener {
             val intent = Intent(this, TasksNotesActivity::class.java)
             startActivity(intent)
@@ -50,6 +46,8 @@ class AddTaskActivity : AppCompatActivity() {
 
         binding.saveTaskBtn.setOnClickListener {
             val returnIntent = Intent()
+
+            // Retrieve input values
             val title = binding.inputTaskTitle.text.toString()
             val category = binding.inputTaskCategory.text.toString()
             val selectedId = binding.statusRadioGroup.checkedRadioButtonId
@@ -57,11 +55,26 @@ class AddTaskActivity : AppCompatActivity() {
             val status = radioButton.text.toString()
             val deadline = binding.inputTaskDeadline.text.toString()
 
-            val task = TaskModel(title, category, status, deadline)
-
-            returnIntent.putExtra("task", task)
-            setResult(Activity.RESULT_OK, returnIntent)
-            finish()
+            // Perform error checking
+            if (title.isBlank() || category.isBlank() || status.isBlank() || deadline.isBlank()) {
+                // Show a toast warning for empty fields
+                Toast.makeText(this, "All fields are required", Toast.LENGTH_SHORT).show()
+            } else if (!isValidDateFormat(deadline)) {
+                // Show a toast warning for invalid date format
+                Toast.makeText(this, "Invalid deadline format. Please use MM/DD/YY", Toast.LENGTH_SHORT).show()
+            } else {
+                // Continue with creating TaskModel and returning the result
+                val task = TaskModel(title, category, status, deadline)
+                returnIntent.putExtra("task", task)
+                setResult(Activity.RESULT_OK, returnIntent)
+                finish()
+            }
         }
+    }
+
+    // Function to check if the date has a valid MM/DD/YY format
+    private fun isValidDateFormat(date: String): Boolean {
+        val regex = Regex("""^(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/\d{2}$""")
+        return regex.matches(date)
     }
 }

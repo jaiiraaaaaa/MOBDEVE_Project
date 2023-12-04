@@ -11,6 +11,7 @@ import android.gesture.Prediction
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +30,7 @@ class TasksNotesActivity : AppCompatActivity() {
         ASCENDING,
         DESCENDING
     }
+
     //Tasks vars
     private lateinit var tasksRecyclerView: RecyclerView
     private lateinit var tasksAdapter: TaskEditableRecyclerView
@@ -57,11 +59,6 @@ class TasksNotesActivity : AppCompatActivity() {
         binding = ActivityTasksNoteBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.logoutBtn.setOnClickListener {
-            startActivity(Intent(this, MainActivity:: class.java))
-            finish()
-        }
-
         binding.dashboardNav.setOnClickListener (View.OnClickListener {
             val intent = Intent(this, DashboardActivity::class.java)
             startActivity(intent)
@@ -83,20 +80,88 @@ class TasksNotesActivity : AppCompatActivity() {
             val intent = Intent(this, AddTaskActivity::class.java)
             startActivityForResult(intent, AddTaskRequest)
         }
-        binding.tasksSortBtn.setOnClickListener {
-            when (taskCurrentSortingOrder) {
-                SortingOrder.ASCENDING -> {
+
+        // Initialize the options and the ArrayAdapter
+        val taskOptions = arrayOf("Earliest Deadline", "Latest Deadline", "Subject", "Todo First", "In Progress First", "Completed First")
+        val taskAdapter = ArrayAdapter(this, R.layout.layout_dropdown_item, taskOptions)
+
+        // Set the adapter for the AutoCompleteTextView
+        binding.tasksSortBtn.setAdapter(taskAdapter)
+
+        binding.tasksSortBtn.setOnItemClickListener { parent, view, position, id ->
+            val selectedOption = parent.getItemAtPosition(position) as String
+            when (selectedOption) {
+                "Earliest Deadline" -> {
+                    // Sort by earliest deadline
                     taskList.sortWith(compareBy { it.deadline.toDateFormat("MM/dd/yy") })
-                    taskCurrentSortingOrder = SortingOrder.DESCENDING
-                }
-                SortingOrder.DESCENDING -> {
-                    taskList.sortWith(compareByDescending { it.deadline.toDateFormat("MM/dd/yy") })
                     taskCurrentSortingOrder = SortingOrder.ASCENDING
+                    tasksAdapter.notifyDataSetChanged()
+                }
+                "Latest Deadline" -> {
+                    // Sort by latest deadline
+                    taskList.sortWith(compareByDescending { it.deadline.toDateFormat("MM/dd/yy") })
+                    taskCurrentSortingOrder = SortingOrder.DESCENDING
+                    tasksAdapter.notifyDataSetChanged()
+                }
+                "Subject" -> {
+                    // Sort by subject (category)
+                    taskList.sortBy { it.subject }
+                    taskCurrentSortingOrder = SortingOrder.ASCENDING
+                    tasksAdapter.notifyDataSetChanged()
+                }
+                "Todo First" -> {
+                    // Sort tasks with "Todo" status to the top
+                    taskList.sortBy { it.status != "Todo" }
+                    taskCurrentSortingOrder = SortingOrder.ASCENDING
+                    tasksAdapter.notifyDataSetChanged()
+                }
+                "In Progress First" -> {
+                    // Sort tasks with "In Progress" status to the top
+                    taskList.sortBy { it.status != "In Progress" }
+                    taskCurrentSortingOrder = SortingOrder.ASCENDING
+                    tasksAdapter.notifyDataSetChanged()
+                }
+                "Completed First" -> {
+                    // Sort tasks with "Completed" status to the top
+                    taskList.sortBy { it.status != "Completed" }
+                    taskCurrentSortingOrder = SortingOrder.ASCENDING
+                    tasksAdapter.notifyDataSetChanged()
                 }
             }
-            tasksAdapter.notifyDataSetChanged()
         }
-        binding.notesSortBtn.setOnClickListener {
+
+        // Initialize the options and the ArrayAdapter
+        val noteOptions = arrayOf("Created Earliest", "Created Latest", "Title")
+        val noteAdapter = ArrayAdapter(this, R.layout.layout_dropdown_item, noteOptions)
+
+        // Set the adapter for the AutoCompleteTextView
+        binding.notesSortBtn.setAdapter(noteAdapter)
+
+        binding.notesSortBtn.setOnItemClickListener { parent, view, position, id ->
+            when (parent.getItemAtPosition(position) as String) {
+                "Created Earliest" -> {
+                    // Sort by earliest date
+                    noteList.sortWith(compareBy { it.date.toDateFormat("MM/dd/yy") })
+                    noteCurrentSortingOrder = SortingOrder.ASCENDING
+                    notesAdapter.notifyDataSetChanged()
+                }
+                "Created Latest" -> {
+                    // Sort by latest date
+                    noteList.sortWith(compareByDescending { it.date.toDateFormat("MM/dd/yy") })
+                    noteCurrentSortingOrder = SortingOrder.DESCENDING
+                    notesAdapter.notifyDataSetChanged()
+                }
+                "Title" -> {
+                    // Sort by title (case-insensitive)
+                    noteList.sortBy { it.title.lowercase() }
+                    noteCurrentSortingOrder = SortingOrder.ASCENDING
+                    notesAdapter.notifyDataSetChanged()
+                }
+            }
+        }
+
+        /*binding.notesSortBtn.setOnClickListener {
+
             when (noteCurrentSortingOrder) {
                 SortingOrder.ASCENDING -> {
                     noteList.sortWith(compareBy { it.date.toDateFormat("MM/dd/yy") })
@@ -108,7 +173,7 @@ class TasksNotesActivity : AppCompatActivity() {
                 }
             }
             notesAdapter.notifyDataSetChanged()
-        }
+        }*/
 
         // Gestures
         gLibrary = GestureLibraries.fromRawResource(this, R.raw.gestures)

@@ -4,6 +4,10 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.ui.AppBarConfiguration
 import com.example.planify.database.NoteDatabase
@@ -17,6 +21,8 @@ class AddNoteActivity : AppCompatActivity() {
     private lateinit var notesAdapter: NoteRecyclerView
     private lateinit var noteList: MutableList<NoteModel>
 
+    // Format for MM/DD/YY
+    private val dateFormat = SimpleDateFormat("MM/dd/yy", Locale.US)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val noteDatabase = NoteDatabase(applicationContext)
@@ -26,10 +32,9 @@ class AddNoteActivity : AppCompatActivity() {
         noteList = intent.getSerializableExtra("noteList") as? MutableList<NoteModel> ?: mutableListOf()
         notesAdapter = NoteRecyclerView(noteDatabase.getNoteList())
 
-        binding.logoutBtn.setOnClickListener {
-            startActivity(Intent(this, MainActivity:: class.java))
-            finish()
-        }
+        // Autofill the current date
+        val currentDate = dateFormat.format(Date())
+        binding.inputDate.setText(currentDate)
 
         binding.dashboardNav.setOnClickListener (View.OnClickListener {
             val intent = Intent(this, DashboardActivity::class.java)
@@ -54,11 +59,26 @@ class AddNoteActivity : AppCompatActivity() {
             val date = binding.inputDate.text.toString()
             val content = binding.inputContent.text.toString()
 
-            val note = NoteModel(title, content, date)
-            returnIntent.putExtra("note", note)
-            setResult(Activity.RESULT_OK, returnIntent)
-
-            finish()
+            // Perform error checking
+            if (title.isBlank()) {
+                // Show a toast warning for blank title
+                Toast.makeText(this, "Title is required", Toast.LENGTH_SHORT).show()
+            } else if (date.isBlank() || !isValidDateFormat(date)) {
+                // Show a toast warning for invalid or blank date format
+                Toast.makeText(this, "Invalid date format. Please use MM/DD/YY", Toast.LENGTH_SHORT).show()
+            } else {
+                // Continue with creating NoteModel and returning the result
+                val note = NoteModel(title, content, currentDate)
+                returnIntent.putExtra("note", note)
+                setResult(Activity.RESULT_OK, returnIntent)
+                finish()
+            }
         }
+    }
+
+    // Function to check if the date has a valid MM/DD/YY format
+    private fun isValidDateFormat(date: String): Boolean {
+        val regex = Regex("""^(0[1-9]|1[0-2])/(0[1-9]|[1-2][0-9]|3[0-1])/\d{2}$""")
+        return regex.matches(date)
     }
 }

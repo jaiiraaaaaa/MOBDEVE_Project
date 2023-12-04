@@ -48,11 +48,6 @@ class DashboardActivity : AppCompatActivity() {
         this.binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(this.binding.root)
 
-        binding.logoutBtn.setOnClickListener {
-            startActivity(Intent(this, MainActivity:: class.java))
-            finish()
-        }
-
         binding.taskNav.setOnClickListener (View.OnClickListener {
             val intent = Intent(this, TasksNotesActivity::class.java)
             startActivity(intent)
@@ -67,13 +62,20 @@ class DashboardActivity : AppCompatActivity() {
         taskDatabase = TaskDatabase(applicationContext)
         // Tasks Dashboard Recycler View
         tasks = taskDatabase.getTaskList()
+
+        // Define the custom sorting order
+        val customOrder = listOf("Todo", "In Progress", "Completed")
+
+        // Sort tasks based on the custom order
+        tasks.sortBy { customOrder.indexOf(it.status) }
+
         tasksRecyclerView = findViewById(R.id.recycleTasksDashboard)
         tasksAdapter = TaskNotEditRecyclerView(tasks)
         tasksRecyclerView.adapter = tasksAdapter
         tasksRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
         binding.dashboardTodoTv.text = countTasksWithStatus(tasks, "Todo")
-        binding.dashboardInProgressTv.text = countTasksWithStatus(tasks, "In progress")
+        binding.dashboardInProgressTv.text = countTasksWithStatus(tasks, "In Progress")
         binding.dashboardCompletedTv.text = countTasksWithStatus(tasks, "Completed")
     }
 
