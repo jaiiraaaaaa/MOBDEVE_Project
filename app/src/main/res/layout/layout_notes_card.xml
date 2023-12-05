@@ -30,7 +30,7 @@
 
         <LinearLayout
             android:layout_width="125dp"
-            android:layout_height="70dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="7dp"
             android:layout_marginTop="50dp"
             android:orientation="vertical">
@@ -50,7 +50,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif"
                 android:text="Note details"
-                android:textSize="7sp"
+                android:textSize="9sp"
+                android:maxLines="3"
                 android:textStyle="italic"/>
 
         </LinearLayout>
@@ -72,7 +73,7 @@
             android:fontFamily="sans-serif"
             android:text="MM/DD/YY"
             android:textAlignment="center"
-            android:textSize="6sp" />
+            android:textSize="8sp" />
 
     </androidx.cardview.widget.CardView>
 
