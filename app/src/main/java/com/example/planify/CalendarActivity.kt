@@ -53,10 +53,6 @@ class CalendarActivity : AppCompatActivity() {
         taskDatabase = TaskDatabase(applicationContext)
         tasks = taskDatabase.getTaskList()
 
-        // Sort by date
-        //tasks.sortWith(compareBy { it.deadline.toDateFormat("MM/dd/yy") })
-        //tasksAdapter.notifyDataSetChanged()
-
         Log.d("Tasks", tasks.joinToString("\n"))
         tasksRecyclerView = findViewById(R.id.recycleTasksCalendar)
         tasksAdapter = TaskNotEditRecyclerView(tasks)
@@ -74,7 +70,7 @@ class CalendarActivity : AppCompatActivity() {
         // Set an item click listener for the AutoCompleteTextView
         binding.calendarSortBtn.setOnItemClickListener { parent, view, position, id ->
             when (parent.getItemAtPosition(position) as String) {
-                "View by Date" -> {
+                "Selected Date" -> {
                     // Set the OnDateChangeListener to filter tasks by the selected date
                     binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
                         val selectedDate = "${month + 1}/${dayOfMonth}/${year.toString().takeLast(2)}"
@@ -84,7 +80,7 @@ class CalendarActivity : AppCompatActivity() {
                         tasksAdapter.updateTasks(filteredTasks)
                     }
                 }
-                "View All" -> {
+                "All Dates" -> {
                     // Remove the OnDateChangeListener and show all tasks
                     binding.calendarView.setOnDateChangeListener(null)
                     tasksAdapter.updateTasks(tasks)
