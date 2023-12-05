@@ -52,16 +52,16 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper(context, DATABASE_NA
         }
 
         val INSERT_SAMPLE_TASK_DATA = "INSERT INTO $TASK_TABLE VALUES" +
-                "(1, 'please work', 'MOBDEVE', 'In progress', '11/20/23')" +
-                ",(2, 'db test', 'CSOPESY', 'Todo', '11/20/23')" +
-                ",(3, 'Final Proj', 'STINTSY', 'Todo', '12/20/23')" +
-                ",(4, 'Notebook', 'STINTSY', 'Completed', '11/20/23')"
+                "(1, 'Demo', 'MOBDEVE', 'In Progress', '12/06/23')" +
+                ",(2, 'Study finals', 'CSOPESY', 'Todo', '12/06/23')" +
+                ",(3, 'Final Proj', 'STINTSY', 'Todo', '12/07/23')" +
+                ",(4, 'Notebook', 'STINTSY', 'Completed', '12/08/23')"
         db?.execSQL(INSERT_SAMPLE_TASK_DATA)
 
         val INSERT_SAMPLE_NOTE_DATA = "INSERT INTO $NOTE_TABLE VALUES" +
-                "(1, 'sample input', 'Sample Description of Note 1', '11/20/23')" +
-                ",(2, 'mama mo', 'Sample Description of Note 2', '11/20/23')" +
-                ",(3, 'Deadlines', 'Sample Description of Note 2', '12/20/23')"
+                "(1, 'Demo Details', 'Wed, 1030 - 1045', '12/05/23')" +
+                ",(2, 'Grocery List', '- Eggs, milk, chips, meat', '12/01/23')" +
+                ",(3, 'Deadlines', 'STINTSY - Dec. 7, CSOPESY - Dec. 6', '12/03/23')"
         db?.execSQL(INSERT_SAMPLE_NOTE_DATA)
     }
     private fun checkIfTableExists(db: SQLiteDatabase?, tableName: String): Boolean {
