@@ -52,7 +52,7 @@ class DatabaseHandler (context: Context) : SQLiteOpenHelper(context, DATABASE_NA
         }
 
         val INSERT_SAMPLE_TASK_DATA = "INSERT INTO $TASK_TABLE VALUES" +
-                "(1, 'please work', 'MOBDEVE', 'In progress', '11/20/23')" +
+                "(1, 'please work', 'MOBDEVE', 'In Progress', '11/20/23')" +
                 ",(2, 'db test', 'CSOPESY', 'Todo', '11/20/23')" +
                 ",(3, 'Final Proj', 'STINTSY', 'Todo', '12/20/23')" +
                 ",(4, 'Notebook', 'STINTSY', 'Completed', '11/20/23')"
