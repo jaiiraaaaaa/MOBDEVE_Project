@@ -111,19 +111,19 @@ class TasksNotesActivity : AppCompatActivity() {
                 }
                 "Todo First" -> {
                     // Sort tasks with "Todo" status to the top
-                    taskList.sortBy { it.status != "Todo" }
+                    taskList.sortWith(compareBy({ it.status != "Todo" }, { it.deadline.toDateFormat("MM/dd/yy") }))
                     taskCurrentSortingOrder = SortingOrder.ASCENDING
                     tasksAdapter.notifyDataSetChanged()
                 }
                 "In Progress First" -> {
                     // Sort tasks with "In Progress" status to the top
-                    taskList.sortBy { it.status != "In Progress" }
+                    taskList.sortWith(compareBy({ it.status != "In Progress" }, { it.deadline.toDateFormat("MM/dd/yy") }))
                     taskCurrentSortingOrder = SortingOrder.ASCENDING
                     tasksAdapter.notifyDataSetChanged()
                 }
                 "Completed First" -> {
                     // Sort tasks with "Completed" status to the top
-                    taskList.sortBy { it.status != "Completed" }
+                    taskList.sortWith(compareBy({ it.status != "Completed" }, { it.deadline.toDateFormat("MM/dd/yy") }))
                     taskCurrentSortingOrder = SortingOrder.ASCENDING
                     tasksAdapter.notifyDataSetChanged()
                 }
@@ -159,21 +159,6 @@ class TasksNotesActivity : AppCompatActivity() {
                 }
             }
         }
-
-        /*binding.notesSortBtn.setOnClickListener {
-
-            when (noteCurrentSortingOrder) {
-                SortingOrder.ASCENDING -> {
-                    noteList.sortWith(compareBy { it.date.toDateFormat("MM/dd/yy") })
-                    noteCurrentSortingOrder = SortingOrder.DESCENDING
-                }
-                SortingOrder.DESCENDING -> {
-                    noteList.sortWith(compareByDescending { it.date.toDateFormat("MM/dd/yy") })
-                    noteCurrentSortingOrder = SortingOrder.ASCENDING
-                }
-            }
-            notesAdapter.notifyDataSetChanged()
-        }*/
 
         // Gestures
         gLibrary = GestureLibraries.fromRawResource(this, R.raw.gestures)

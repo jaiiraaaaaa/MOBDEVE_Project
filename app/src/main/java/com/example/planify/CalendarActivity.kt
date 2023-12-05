@@ -27,7 +27,12 @@ class CalendarActivity : AppCompatActivity() {
     private fun String.toDateFormat(format: String): String {
         val sdf = SimpleDateFormat(format, Locale.getDefault())
         val date = sdf.parse(this) ?: Date()
-        return SimpleDateFormat("MM/dd/yy", Locale.getDefault()).format(date)
+
+        val month = SimpleDateFormat("MM", Locale.getDefault()).format(date)
+        val day = SimpleDateFormat("dd", Locale.getDefault()).format(date)
+        val year = SimpleDateFormat("yy", Locale.getDefault()).format(date)
+
+        return "$month/$day/$year"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -73,9 +78,13 @@ class CalendarActivity : AppCompatActivity() {
                 "Selected Date" -> {
                     // Set the OnDateChangeListener to filter tasks by the selected date
                     binding.calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-                        val selectedDate = "${month + 1}/${dayOfMonth}/${year.toString().takeLast(2)}"
+                        val selectedDate = "${(month + 1).toString().padStart(2, '0')}/${dayOfMonth.toString().padStart(2, '0')}/${year.toString().takeLast(2)}"
+                        Log.d("CalendarActivity", "Selected Date: $selectedDate")
+
                         val filteredTasks = tasks.filter {
-                            it.deadline.toDateFormat("MM/dd/yy") == selectedDate
+                            val taskDeadlineDate = it.deadline
+                            Log.d("CalendarActivity", "Task Deadline: $taskDeadlineDate, Matches: ${taskDeadlineDate == selectedDate}")
+                            taskDeadlineDate == selectedDate
                         }
                         tasksAdapter.updateTasks(filteredTasks)
                     }
@@ -88,5 +97,9 @@ class CalendarActivity : AppCompatActivity() {
             }
         }
 
+    }
+    fun updateTasksList() {
+        tasks = taskDatabase.getTaskList()
+        tasksAdapter.updateTasks(tasks)
     }
 }
